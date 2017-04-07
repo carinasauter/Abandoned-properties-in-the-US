@@ -1,1 +1,18 @@
-index.css
+section {
+    height:100vh;
+    padding: 50px 0 0 5px;
+    margin: 0;
+}
+
+#firstsection { 
+    background-color: yellow;
+    background-image: 
+}
+
+#secondsection { 
+    background-color: blue;
+}
+
+#thirdsection {
+	background-color: green;
+}
