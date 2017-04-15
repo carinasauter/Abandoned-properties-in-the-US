@@ -212,7 +212,7 @@
         console.log('map loaded!');
 
         // we'll use d3.json to load the point data asynchronously
-        d3.json('abandoned_chicago.geojson', function(error, data) {
+        d3.json('data/abandoned_chicago.geojson', function(error, data) {
 
             // report an error if their was a problem getting the geojson data
             if (error) throw error;
