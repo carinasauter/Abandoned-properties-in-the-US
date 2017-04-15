@@ -4,9 +4,13 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1,user-scalable=no">
     <meta name="description" content="">
     <meta name="author" content="">
+    <script src="//d3js.org/d3.v3.min.js"></script>
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.35.0/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.35.0/mapbox-gl.css' rel='stylesheet' />
+
     <title>Infoviz Final Project - Team 3</title>
     <link rel="stylesheet" type="text/css" href="css/index.css">
 
@@ -185,10 +189,77 @@
     </section>
 
     <section id="finalsection">
-    	<div>
-    		<p>This is the final section</p>
-    	</div>
-    	
+
+    <div id='map' style=' height: 80%; margin: auto; width: 50%;'></div>
+
+    <script>
+    mapboxgl.accessToken = 'pk.eyJ1IjoiY2FyaW5hc2F1dGVyIiwiYSI6ImNqMWpsZzdpczAxbGgyeW9hMTlyc29qY3kifQ.zJT88QY64l6lEkgvby2CFQ';
+    var map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/mapbox/light-v9',
+        center:[-87.625073, 41.875331],
+        zoom: 9
+    });
+
+
+    // add map controls
+    map.addControl(new mapboxgl.NavigationControl());
+
+    // function to call once the map has loaded
+    map.on('load', function() {
+        console.log('map loaded!');
+
+        // we'll use d3.json to load the point data asynchronously
+        d3.json('abandoned_chicago.geojson', function(error, data) {
+
+            // report an error if their was a problem getting the geojson data
+            if (error) throw error;
+
+            // filter out data with no geometry, otherwise MapboxGL throws an error and won't load data
+            data.features = data.features.filter(function(d) {
+                return d.geometry;
+            });
+
+            // add the source to the map styles
+            map.addSource('homes', {
+                type: 'geojson',
+                'data': data,
+                // cluster: true,
+                // clusterRadius: 10,
+                // clusterMaxZoom: 12
+            });
+
+            // add the map layer
+            map.addLayer({
+                id: 'homes',
+                type: 'circle',
+                source: 'homes',
+                'layout': {},
+                'paint': {
+                'circle-color': {
+                    property: 'open_or_boarded',
+                    type: 'categorical',
+                    stops: [
+                        ['Open', '#FECC5C'],
+                        ['Boarded', '#FD8D3C']
+    
+                    ]
+                },
+                'circle-opacity': 0.8,
+                'circle-radius': {
+                    'base': 1.75,
+                    'stops': [[12, 2], [22, 180]]
+                },
+            }
+            });
+
+        }); // end d3.json
+
+    }); // end map.on('load')
+
+    </script>
+
+
     </section>
 
 </body>
