@@ -1,18 +1,40 @@
+html,body {
+    margin:0;
+    padding:0; 
+}
+
 section {
     height:100vh;
     padding: 50px 0 0 5px;
-    margin: 0;
+}
+
+header {
+  position: relative;
+  width: 100%;
+  min-height: auto;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  -o-background-size: cover;
+  background-position: center;
+  background-image: url('../img/header.jpg');
+  text-align: center;
+  color: white;
 }
 
 #firstsection { 
-    background-color: yellow;
-    background-image: 
+    background-color: #E63946;
 }
 
 #secondsection { 
-    background-color: blue;
+    background-color: #F1FAEE;
 }
 
 #thirdsection {
-	background-color: green;
+	background-color: #457B9D;
+}
+
+#finalsection {
+	background-color: #1D3557;
+	height: 50vh;
 }
