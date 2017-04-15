@@ -241,9 +241,6 @@ header .header-content .header-content-inner p {
   /*transform: translateY(-50%);*/
 }
 
-.portfolio-box-caption-content {
-  text-align: left;
-}
 
 .portfolio-box .portfolio-box-caption .portfolio-box-caption-content .project-category,
 .portfolio-box .portfolio-box-caption .portfolio-box-caption-content .project-name {
