@@ -223,7 +223,7 @@ header .header-content .header-content-inner p {
   color: white;
   opacity: 0;
   display: block;
-  background: rgba(240, 95, 64, 0.9);
+  background: #C4BBAF;
   position: absolute;
   bottom: 0;
   text-align: center;
@@ -237,9 +237,14 @@ header .header-content .header-content-inner p {
   width: 100%;
   text-align: center;
   position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
+  top: 10%;
+  /*transform: translateY(-50%);*/
 }
+
+.portfolio-box-caption-content {
+  text-align: left;
+}
+
 .portfolio-box .portfolio-box-caption .portfolio-box-caption-content .project-category,
 .portfolio-box .portfolio-box-caption .portfolio-box-caption-content .project-name {
   font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
@@ -261,10 +266,10 @@ header .header-content .header-content-inner p {
 }
 @media (min-width: 768px) {
   .portfolio-box .portfolio-box-caption .portfolio-box-caption-content .project-category {
-    font-size: 16px;
+    font-size: 22px;
   }
   .portfolio-box .portfolio-box-caption .portfolio-box-caption-content .project-name {
-    font-size: 22px;
+    font-size: 16px;
   }
 }
 .call-to-action h2 {

@@ -23,18 +23,22 @@ header {
 }
 
 #firstsection { 
-    background-color: #E63946;
+    background-color: #5C4742;
 }
 
 #secondsection { 
-    background-color: #F1FAEE;
+    background-color: #A5978B;
 }
 
 #thirdsection {
-	background-color: #457B9D;
+	background-color: #5A2A27;
 }
 
 #finalsection {
-	background-color: #1D3557;
+	background-color: #8D5B4C;
 	height: 50vh;
+}
+
+#portfolio {
+  background-color: #5C4742;
 }
