@@ -9,6 +9,8 @@
     <meta name="author" content="">
     <script src="//d3js.org/d3.v3.min.js"></script>
     <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.35.0/mapbox-gl.js'></script>
+    <!-- NEW: add turf.js  -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Turf.js/2.0.2/turf.min.js"></script>
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.35.0/mapbox-gl.css' rel='stylesheet' />
 
     <title>Infoviz Final Project - Team 3</title>
@@ -190,14 +192,14 @@
 
     <section id="finalsection">
 
-    <div id='map' style=' height: 80%; margin: auto; width: 50%;'></div>
+    <div id='map' style=' height: 100%; width: 50%; margin:auto;'></div>
 
     <script>
     mapboxgl.accessToken = 'pk.eyJ1IjoiY2FyaW5hc2F1dGVyIiwiYSI6ImNqMWpsZzdpczAxbGgyeW9hMTlyc29qY3kifQ.zJT88QY64l6lEkgvby2CFQ';
     var map = new mapboxgl.Map({
         container: 'map',
         style: 'mapbox://styles/mapbox/light-v9',
-        center:[-87.625073, 41.875331],
+        center:[-87.622498, 41.834082],
         zoom: 9
     });
 
@@ -220,29 +222,90 @@
                 return d.geometry;
             });
 
-            // add the source to the map styles
-            map.addSource('homes', {
-                type: 'geojson',
-                'data': data,
-                // cluster: true,
-                // clusterRadius: 10,
-                // clusterMaxZoom: 12
-            });
+            // bounding box for our data's extent (I computed this ahead of time)
 
-            // add the map layer
-            map.addLayer({
-                id: 'homes',
-                type: 'circle',
-                source: 'homes',
-                'layout': {},
-                'paint': {
+
+        var bbox = [-87.940267,41.619036,-87.463531,42.089561];
+        // our cell size, try changing this to a different value like 10
+        var cellSize = 0.5;
+        // units of our cells
+        var units = 'kilometers';
+
+        // create our hex grid
+        var hexGrid = turf.hexGrid(bbox, cellSize, units);
+
+        // count the number of crashes in each hex grid, this will take a few seconds.
+        // in an real life app we would want to display a loading GIF or message here
+        console.log('binning data, hold on tight...');
+        var hexHomes = turf.count(hexGrid, data, 'allHomes');
+        console.log('done! ', hexHomes);
+
+        // create a jenks natural breaks classification, see: https://en.wikipedia.org/wiki/Jenks_natural_breaks_optimization
+        // the number of breaks we are using
+        var numberBreaks = 5;
+
+        // NOTE: turf-jenks is technically depreciated, but it still works
+        var jenksBreaks = turf.jenks(hexHomes, 'allHomes', numberBreaks);
+        console.log('our jenksBreaks array: ', jenksBreaks);
+
+        // via color brewer: http://colorbrewer2.org/#type=sequential&scheme=RdPu&n=5
+        var colors = ['#feebe2', '#fbb4b9', '#f768a1', '#c51b8a', '#7a0177'];
+
+        // create our color stops for the hexCrashes map layer style
+        var colorStops = jenksBreaks.map(function(b, i) {
+            if (i > 0) {
+                // here we map each color in the color array to it's corresponding bin
+                return [b, colors[i -1]];
+            } else {
+                // in the case of 0, hide the bin
+                return [b, 'rgba(255, 255, 255, 0)'];
+            }
+        });
+
+        // add our hex crashes layer data
+        map.addSource('HomesHexGrid', {
+            type: 'geojson',
+            data: hexHomes
+        });
+
+        // add our hex crashes layer style
+        map.addLayer({
+            "id": "HomesHexGrid",
+            "type": "fill",
+            "source": "HomesHexGrid",
+            "layout": {},
+            "paint":{
+                'fill-color': {
+                    property: 'allHomes',
+                    stops: colorStops,
+                },
+                'fill-opacity': 0.6
+            }
+        });
+
+
+        // add the source to the map styles
+        map.addSource('homes', {
+            type: 'geojson',
+            'data': data,
+            // cluster: true,
+            // clusterRadius: 10,
+            // clusterMaxZoom: 12
+        });
+
+        // add the map layer
+        map.addLayer({
+            id: 'homes',
+            type: 'circle',
+            source: 'homes',
+            'layout': {},
+            'paint': {
                 'circle-color': {
                     property: 'open_or_boarded',
                     type: 'categorical',
                     stops: [
                         ['Open', '#FECC5C'],
                         ['Boarded', '#FD8D3C']
-    
                     ]
                 },
                 'circle-opacity': 0.8,
@@ -251,11 +314,11 @@
                     'stops': [[12, 2], [22, 180]]
                 },
             }
-            });
+        }, 'HomesHexGrid');
 
         }); // end d3.json
 
-    }); // end map.on('load')
+        }); // end map.on('load')
 
     </script>
 
