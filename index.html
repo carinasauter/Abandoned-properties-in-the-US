@@ -15,7 +15,7 @@
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.35.0/mapbox-gl.css' rel='stylesheet' />
 
     <title>Infoviz Final Project - Team 3</title>
-    <link rel="stylesheet" type="text/css" href="css/index.css">
+    
 
     <!-- Bootstrap Core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -26,7 +26,7 @@
     <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
 
     <!-- Theme CSS -->
-    <link href="css/creative.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/index.css">
 
 </head>
 <body id='page-top'>
@@ -188,10 +188,19 @@
         </div>
     </section>
 
+    <section id='case_study'>
+
+    <div id='subheader'>
+    A case study on Chicago
+    </div>
+        
+    </section>
+
+
     <section id="finalsection">
 
     <div>
-    Address:<br>
+    <p> Address: </p><br>
     <input type="text" id="address"><br>
     <button onclick="myFunction()">Show me the location</button>
     <button onclick ='myFunction2()'>Show me all</button>
@@ -235,8 +244,8 @@
             var center_lat = center_loc.results[0].geometry.location.lat;
             var center_lon = center_loc.results[0].geometry.location.lng;
 
-            console.log(center_lat);
-            console.log(center_lon);
+            // console.log(center_lat);
+            // console.log(center_lon);
 
             mapboxgl.accessToken = 'pk.eyJ1IjoiY2FyaW5hc2F1dGVyIiwiYSI6ImNqMWpsZzdpczAxbGgyeW9hMTlyc29qY3kifQ.zJT88QY64l6lEkgvby2CFQ';
             var map = new mapboxgl.Map({
@@ -248,10 +257,10 @@
 
             // add map controls
             map.addControl(new mapboxgl.NavigationControl());
-            map.addControl(new mapboxgl.ScaleControl({
-                maxWidth: 80,
-                unit: 'imperial'
-            }));
+            // map.addControl(new mapboxgl.ScaleControl({
+            //     maxWidth: 80,
+            //     unit: 'imperial'
+            // }));
 
             // function to call once the map has loaded
             map.on('load', function() {
@@ -453,10 +462,6 @@
                     });
 
 
-
-
-
-
                 //     map.addLayer({
                 //     id: 'homes',
                 //     type: 'circle',
@@ -623,12 +628,9 @@
     </script>
 
 
-     <div id='map' style=' height: 100%; width: 50%; margin-left: 2.5%;'></div>
 
 
-
-
-
+     <div id='map' style=' height: 70%; width: 50%; margin-top: 2%'></div>
 
 
     </section>
