@@ -296,6 +296,7 @@
                         }
                     });
 
+
                     var createGeoJSONCircle = function(center, radiusInKm, points) {
                         if(!points) points = 64;
 
@@ -336,54 +337,50 @@
                     };
 
 
-                    // if using single point for radius stuff
+                    // // if using single point for radius stuff
 
-                    // 450 ft = 137.16 m
-                    // 300 ft = 91.44 m
-                    // 150 ft = 45.72 m
+                    // // 450 ft = 137.16 m
+                    // // 300 ft = 91.44 m
+                    // // 150 ft = 45.72 m
 
-                    map.addSource("polygon", createGeoJSONCircle([center_lon, center_lat], 0.13716));
-                    map.addLayer({
-                        "id": "polygon",
-                        "type": "fill",
-                        "source": "polygon",
-                        "layout": {},
-                        "paint": {
-                            "fill-color": "yellow",
-                            "fill-opacity": 0.3
-                        }
-                    });
+                    // map.addSource("polygon", createGeoJSONCircle([center_lon, center_lat], 0.13716));
+                    // map.addLayer({
+                    //     "id": "polygon",
+                    //     "type": "fill",
+                    //     "source": "polygon",
+                    //     "layout": {},
+                    //     "paint": {
+                    //         "fill-color": "yellow",
+                    //         "fill-opacity": 0.3
+                    //     }
+                    // });
 
-                    map.addSource("polygon2", createGeoJSONCircle([center_lon, center_lat], 0.09144));
-                    map.addLayer({
-                        "id": "polygon2",
-                        "type": "fill",
-                        "source": "polygon2",
-                        "layout": {},
-                        "paint": {
-                            "fill-color": "orange",
-                            "fill-opacity": 0.3
-                        }
-                    });
+                    // map.addSource("polygon2", createGeoJSONCircle([center_lon, center_lat], 0.09144));
+                    // map.addLayer({
+                    //     "id": "polygon2",
+                    //     "type": "fill",
+                    //     "source": "polygon2",
+                    //     "layout": {},
+                    //     "paint": {
+                    //         "fill-color": "orange",
+                    //         "fill-opacity": 0.3
+                    //     }
+                    // });
 
-                    map.addSource("polygon3", createGeoJSONCircle([center_lon, center_lat], 0.04572));
-                    map.addLayer({
-                        "id": "polygon3",
-                        "type": "fill",
-                        "source": "polygon3",
-                        "layout": {},
-                        "paint": {
-                            "fill-color": "red",
-                            "fill-opacity": 0.3
-                        }
-                    });
+                    // map.addSource("polygon3", createGeoJSONCircle([center_lon, center_lat], 0.04572));
+                    // map.addLayer({
+                    //     "id": "polygon3",
+                    //     "type": "fill",
+                    //     "source": "polygon3",
+                    //     "layout": {},
+                    //     "paint": {
+                    //         "fill-color": "red",
+                    //         "fill-opacity": 0.3
+                    //     }
+                    // });
 
-
-
-
-
-
-
+                    const metersToPixelsAtMaxZoom = (meters, latitude) =>
+                    meters / 0.075 / Math.cos(latitude * Math.PI / 180)
 
 
                     // add the source to the map styles
@@ -396,20 +393,100 @@
                     });
 
 
-                    // add the map layer
+                    // add the map layers
+
+                    map.addLayer({
+                        id: 'yellow',
+                        type: 'circle',
+                        source: 'homes',
+                        'layout': {},
+                        'paint': {
+                            'circle-color': 'yellow',
+                            'circle-opacity': 0.3,
+                            "circle-radius": {
+                                stops: [
+                                [0, 0],
+                                [20, metersToPixelsAtMaxZoom(137.16, center_lat)]
+                                ],
+                                base: 2
+                            },
+                        }
+                    });
+
+
+
+                    map.addLayer({
+                        id: 'orange',
+                        type: 'circle',
+                        source: 'homes',
+                        'layout': {},
+                        'paint': {
+                            'circle-color': 'orange',
+                            'circle-opacity': 0.3,
+                            "circle-radius": {
+                                stops: [
+                                [0, 0],
+                                [20, metersToPixelsAtMaxZoom(91.44, center_lat)]
+                                ],
+                                base: 2
+                            },
+                        }
+                    });
+
+
+                    map.addLayer({
+                        id: 'red',
+                        type: 'circle',
+                        source: 'homes',
+                        'layout': {},
+                        'paint': {
+                            'circle-color': 'red',
+                            'circle-opacity': 0.3,
+                            "circle-radius": {
+                                stops: [
+                                [0, 0],
+                                [20, metersToPixelsAtMaxZoom(45.72, center_lat)]
+                                ],
+                                base: 2
+                            },
+                        }
+                    });
+
+
+
+
+
+
+                //     map.addLayer({
+                //     id: 'homes',
+                //     type: 'circle',
+                //     source: 'homes',
+                //     'layout': {},
+                //     'paint': {
+                //         'circle-color': {
+                //             property: 'open_or_boarded',
+                //             type: 'categorical',
+                //             stops: [
+                //                 ['Open', '#000000'],
+                //                 ['Boarded', '#000000']
+                //             ]
+                //         },
+                //         'circle-opacity': 1,
+                //         'circle-radius': {
+                //             'base': 1.75,
+                //             'stops': [[12, 2], [22, 180]]
+                //         },
+                //     }
+                // });
+
+
                     map.addLayer({
                         id: 'homes',
                         type: 'circle',
                         source: 'homes',
                         'layout': {},
                         'paint': {
-                            'circle-color': {
-                                property: 'open_or_boarded',
-                                type: 'categorical',
-                                stops: [
-                                ['Open', '#FECC5C'],
-                                ['Boarded', '#FD8D3C']]
-                            },
+                            'circle-color': 'grey',
                             'circle-opacity': 0.8,
                             'circle-radius': {
                                 'base': 1.75,
