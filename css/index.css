@@ -26,11 +26,12 @@ header {
 }
 
 #firstsection { 
-    background-color: #5C4742;
+    background-color: #ffffff;
 }
 
 #secondsection { 
     background-color: #A5978B;
+    padding-left: 5%;
 }
 
 #thirdsection {
@@ -38,9 +39,21 @@ header {
 }
 
 #finalsection {
-	background-color: #cad2d3;
+	background-color: #ffffff;
 }
 
 #portfolio {
   background-color: #5C4742;
 }
+
+#sources {
+  background-color: #5C4742;
+  height: 40vh;
+}
+
+#sources > div {
+  text-align: center;
+  color: white;
+}
+
+

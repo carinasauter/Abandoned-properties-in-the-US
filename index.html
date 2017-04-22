@@ -11,6 +11,7 @@
     <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.35.0/mapbox-gl.js'></script>
     <!-- NEW: add turf.js  -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Turf.js/2.0.2/turf.min.js"></script>
+    <!-- <script type="text/javascript" src="js/geojson.min.js"></script> -->
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.35.0/mapbox-gl.css' rel='stylesheet' />
 
     <title>Infoviz Final Project - Team 3</title>
@@ -67,29 +68,26 @@
             <div class="header-content-inner">
                 <h1 id="homeHeading">Abandoned Properties</h1>
                 <h1 id ='homeHeading'>in the US</h1>
-                 <hr class="light">
-                <p>Liz Lee, Usman Raza, Carina Sauter</p>
+                <hr class="light">
                 <a href="#firstsection" class="btn btn-primary btn-xl page-scroll">Scroll down to start</a>
             </div>
         </div>
 	</header>
 
 	<section id='firstsection'>
-		<div>
-			<p>This is the first section.</p>
-		</div>
 	</section>
 
 	<section id="secondsection">
 		<div >
-			<p>This is the second section.</p>	
+            <img id='eerie1' style="float:left; height:400px;" src="img/house_2.jpeg" alt="eerie house">
+			<p></p>	
 		</div>
 		
 	</section>
 	
 	<section id="thirdsection">
 		<div>
-			<p>This is the third section.</p>
+			<p></p>
 		</div>	
 	</section>
 
@@ -192,137 +190,384 @@
 
     <section id="finalsection">
 
-    <div id='map' style=' height: 100%; width: 50%; margin:auto;'></div>
+    <div>
+    Address:<br>
+    <input type="text" id="address"><br>
+    <button onclick="myFunction()">Show me the location</button>
+    <button onclick ='myFunction2()'>Show me all</button>
 
-    <script>
-    mapboxgl.accessToken = 'pk.eyJ1IjoiY2FyaW5hc2F1dGVyIiwiYSI6ImNqMWpsZzdpczAxbGgyeW9hMTlyc29qY3kifQ.zJT88QY64l6lEkgvby2CFQ';
-    var map = new mapboxgl.Map({
-        container: 'map',
-        style: 'mapbox://styles/mapbox/light-v9',
-        center:[-87.622498, 41.834082],
-        zoom: 9
-    });
+    </div>
 
 
-    // add map controls
-    map.addControl(new mapboxgl.NavigationControl());
+    <script type="text/javascript">
 
-    // function to call once the map has loaded
-    map.on('load', function() {
-        console.log('map loaded!');
 
-        // we'll use d3.json to load the point data asynchronously
-        d3.json('data/abandoned_chicago.geojson', function(error, data) {
+    function myFunction() {
+        var address = document.getElementById('address').value;
+        var google_endpoint = 'https://maps.googleapis.com/maps/api/geocode/json?';
+        var google_token = 'AIzaSyAVu5x4ezPVUSr6BEQ8I41BN65R6w8D5uI';
+        var address = address.replace(' ', '+');
+        var address = address.concat("+Chicago");
+        var bbox = '-87.940267,41.619036|-87.463531,42.089561';
 
-            // report an error if their was a problem getting the geojson data
-            if (error) throw error;
+        
+        var query = google_endpoint.concat('address=',address,'&','bounds=',bbox,'&','key=',google_token);
 
-            // filter out data with no geometry, otherwise MapboxGL throws an error and won't load data
-            data.features = data.features.filter(function(d) {
-                return d.geometry;
+
+        //http://stackoverflow.com/questions/247483/http-get-request-in-javascript
+        var HttpClient = function() {
+            this.get = function(aUrl, aCallback) {
+                var anHttpRequest = new XMLHttpRequest();
+                anHttpRequest.onreadystatechange = function() {
+                    if (anHttpRequest.readyState == 4 && anHttpRequest.status == 200)
+                        aCallback(anHttpRequest.responseText);
+                }
+                anHttpRequest.open( "GET", aUrl, true );
+                anHttpRequest.send( null );
+            }
+        }
+
+        var client = new HttpClient();
+        client.get(query, function(response) {
+            // do something with response
+            var center_loc = JSON.parse(response);
+
+            var center_lat = center_loc.results[0].geometry.location.lat;
+            var center_lon = center_loc.results[0].geometry.location.lng;
+
+            console.log(center_lat);
+            console.log(center_lon);
+
+            mapboxgl.accessToken = 'pk.eyJ1IjoiY2FyaW5hc2F1dGVyIiwiYSI6ImNqMWpsZzdpczAxbGgyeW9hMTlyc29qY3kifQ.zJT88QY64l6lEkgvby2CFQ';
+            var map = new mapboxgl.Map({
+                container: 'map',
+                style: 'mapbox://styles/mapbox/light-v9',
+                center:[center_lon, center_lat],
+                zoom: 14
             });
 
-            // bounding box for our data's extent (I computed this ahead of time)
+            // add map controls
+            map.addControl(new mapboxgl.NavigationControl());
+            map.addControl(new mapboxgl.ScaleControl({
+                maxWidth: 80,
+                unit: 'imperial'
+            }));
+
+            // function to call once the map has loaded
+            map.on('load', function() {
+                console.log('map loaded!');
+
+                // we'll use d3.json to load the point data asynchronously
+                d3.json('data/abandoned_chicago.geojson', function(error, data) {
+
+                    // report an error if their was a problem getting the geojson data
+                    if (error) throw error;
+
+                    // filter out data with no geometry, otherwise MapboxGL throws an error and won't load data
+                    data.features = data.features.filter(function(d) {
+                        return d.geometry;
+                    });
 
 
-        var bbox = [-87.940267,41.619036,-87.463531,42.089561];
-        // our cell size, try changing this to a different value like 10
-        var cellSize = 0.5;
-        // units of our cells
-        var units = 'kilometers';
 
-        // create our hex grid
-        var hexGrid = turf.hexGrid(bbox, cellSize, units);
+                    // add the centerpoint (user input)
 
-        // count the number of crashes in each hex grid, this will take a few seconds.
-        // in an real life app we would want to display a loading GIF or message here
-        console.log('binning data, hold on tight...');
-        var hexHomes = turf.count(hexGrid, data, 'allHomes');
-        console.log('done! ', hexHomes);
+                    map.addSource('centerpoint',{
+                        'type': 'geojson',
+                        "data": {
+                            "type": "FeatureCollection",
+                            "features": [{
+                                "type": "Feature",
+                                "geometry": {
+                                    "type": "Point",
+                                    "coordinates": [center_lon, center_lat]
+                                }
+                            }]
+                        }
+                    });
 
-        // create a jenks natural breaks classification, see: https://en.wikipedia.org/wiki/Jenks_natural_breaks_optimization
-        // the number of breaks we are using
-        var numberBreaks = 5;
+                    map.addLayer({
+                        id: 'centerpoint',
+                        type: 'circle',
+                        source: 'centerpoint',
+                        'layout': {},
+                        'paint': {
+                            'circle-color': '#000000'
+                        }
+                    });
 
-        // NOTE: turf-jenks is technically depreciated, but it still works
-        var jenksBreaks = turf.jenks(hexHomes, 'allHomes', numberBreaks);
-        console.log('our jenksBreaks array: ', jenksBreaks);
+                    var createGeoJSONCircle = function(center, radiusInKm, points) {
+                        if(!points) points = 64;
 
-        // via color brewer: http://colorbrewer2.org/#type=sequential&scheme=RdPu&n=5
-        var colors = ['#feebe2', '#fbb4b9', '#f768a1', '#c51b8a', '#7a0177'];
+                        var coords = {
+                            latitude: center[1],
+                            longitude: center[0]
+                        };
 
-        // create our color stops for the hexCrashes map layer style
-        var colorStops = jenksBreaks.map(function(b, i) {
-            if (i > 0) {
-                // here we map each color in the color array to it's corresponding bin
-                return [b, colors[i -1]];
-            } else {
-                // in the case of 0, hide the bin
-                return [b, 'rgba(255, 255, 255, 0)'];
-            }
+                        var km = radiusInKm;
+
+                        var ret = [];
+                        var distanceX = km/(111.320*Math.cos(coords.latitude*Math.PI/180));
+                        var distanceY = km/110.574;
+
+                        var theta, x, y;
+                        for(var i=0; i<points; i++) {
+                            theta = (i/points)*(2*Math.PI);
+                            x = distanceX*Math.cos(theta);
+                            y = distanceY*Math.sin(theta);
+
+                            ret.push([coords.longitude+x, coords.latitude+y]);
+                        }
+                        ret.push(ret[0]);
+
+                        return {
+                            "type": "geojson",
+                            "data": {
+                                "type": "FeatureCollection",
+                                "features": [{
+                                    "type": "Feature",
+                                    "geometry": {
+                                        "type": "Polygon",
+                                        "coordinates": [ret]
+                                    }
+                                }]
+                            }
+                        };
+                    };
+
+
+                    // if using single point for radius stuff
+
+                    // 450 ft = 137.16 m
+                    // 300 ft = 91.44 m
+                    // 150 ft = 45.72 m
+
+                    map.addSource("polygon", createGeoJSONCircle([center_lon, center_lat], 0.13716));
+                    map.addLayer({
+                        "id": "polygon",
+                        "type": "fill",
+                        "source": "polygon",
+                        "layout": {},
+                        "paint": {
+                            "fill-color": "yellow",
+                            "fill-opacity": 0.3
+                        }
+                    });
+
+                    map.addSource("polygon2", createGeoJSONCircle([center_lon, center_lat], 0.09144));
+                    map.addLayer({
+                        "id": "polygon2",
+                        "type": "fill",
+                        "source": "polygon2",
+                        "layout": {},
+                        "paint": {
+                            "fill-color": "orange",
+                            "fill-opacity": 0.3
+                        }
+                    });
+
+                    map.addSource("polygon3", createGeoJSONCircle([center_lon, center_lat], 0.04572));
+                    map.addLayer({
+                        "id": "polygon3",
+                        "type": "fill",
+                        "source": "polygon3",
+                        "layout": {},
+                        "paint": {
+                            "fill-color": "red",
+                            "fill-opacity": 0.3
+                        }
+                    });
+
+
+
+
+
+
+
+
+
+                    // add the source to the map styles
+                    map.addSource('homes', {
+                        type: 'geojson',
+                        'data': data,
+                        // cluster: true,
+                        // clusterRadius: 10,
+                        // clusterMaxZoom: 12
+                    });
+
+
+                    // add the map layer
+                    map.addLayer({
+                        id: 'homes',
+                        type: 'circle',
+                        source: 'homes',
+                        'layout': {},
+                        'paint': {
+                            'circle-color': {
+                                property: 'open_or_boarded',
+                                type: 'categorical',
+                                stops: [
+                                ['Open', '#FECC5C'],
+                                ['Boarded', '#FD8D3C']]
+                            },
+                            'circle-opacity': 0.8,
+                            'circle-radius': {
+                                'base': 1.75,
+                                'stops': [[12, 2], [22, 180]]
+                            },
+                        }
+                    });
+
+                    
+
+                    // This is the tooltip
+
+                    // Create a popup, but don't add it to the map yet.
+                    var popup = new mapboxgl.Popup({
+                        closeButton: false,
+                        closeOnClick: false
+                    });
+
+                    map.on('mouseenter', 'homes', function(e) {
+                    // Change the cursor style as a UI indicator.
+                        map.getCanvas().style.cursor = 'pointer';
+
+                        // Populate the popup and set its coordinates
+                        // based on the feature found.
+                        popup.setLngLat(e.features[0].geometry.coordinates)
+                        .setHTML(e.features[0].properties.vacant_fires)
+                        .addTo(map);
+                    });
+
+                    map.on('mouseleave', 'homes', function() {
+                        map.getCanvas().style.cursor = '';
+                        popup.remove();
+
+                    }); //end tooltip
+
+
+                }); // end d3.json
+            }); // end map.on('load')
+        }); // close client
+
+    } // close function
+
+
+    function myFunction2 () {
+
+        mapboxgl.accessToken = 'pk.eyJ1IjoiY2FyaW5hc2F1dGVyIiwiYSI6ImNqMWpsZzdpczAxbGgyeW9hMTlyc29qY3kifQ.zJT88QY64l6lEkgvby2CFQ';
+        var map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/mapbox/light-v9',
+            center:[-87.622498, 41.834082],
+            zoom: 9
         });
 
-        // add our hex crashes layer data
-        map.addSource('HomesHexGrid', {
-            type: 'geojson',
-            data: hexHomes
-        });
 
-        // add our hex crashes layer style
-        map.addLayer({
-            "id": "HomesHexGrid",
-            "type": "fill",
-            "source": "HomesHexGrid",
-            "layout": {},
-            "paint":{
-                'fill-color': {
-                    property: 'allHomes',
-                    stops: colorStops,
-                },
-                'fill-opacity': 0.6
-            }
-        });
+        // add map controls
+        map.addControl(new mapboxgl.NavigationControl());
+
+        // function to call once the map has loaded
+        map.on('load', function() {
+            console.log('map loaded!');
+
+            // we'll use d3.json to load the point data asynchronously
+            d3.json('data/abandoned_chicago.geojson', function(error, data) {
+
+                // report an error if their was a problem getting the geojson data
+                if (error) throw error;
+
+                // filter out data with no geometry, otherwise MapboxGL throws an error and won't load data
+                data.features = data.features.filter(function(d) {
+                    return d.geometry;
+                });
 
 
-        // add the source to the map styles
-        map.addSource('homes', {
-            type: 'geojson',
-            'data': data,
-            // cluster: true,
-            // clusterRadius: 10,
-            // clusterMaxZoom: 12
-        });
+                // add the source to the map styles
+                map.addSource('homes', {
+                    type: 'geojson',
+                    'data': data,
+                    // cluster: true,
+                    // clusterRadius: 10,
+                    // clusterMaxZoom: 12
+                });
 
-        // add the map layer
-        map.addLayer({
-            id: 'homes',
-            type: 'circle',
-            source: 'homes',
-            'layout': {},
-            'paint': {
-                'circle-color': {
-                    property: 'open_or_boarded',
-                    type: 'categorical',
-                    stops: [
-                        ['Open', '#FECC5C'],
-                        ['Boarded', '#FD8D3C']
-                    ]
-                },
-                'circle-opacity': 0.8,
-                'circle-radius': {
-                    'base': 1.75,
-                    'stops': [[12, 2], [22, 180]]
-                },
-            }
-        }, 'HomesHexGrid');
+                // add the map layer
+                map.addLayer({
+                    id: 'homes',
+                    type: 'circle',
+                    source: 'homes',
+                    'layout': {},
+                    'paint': {
+                        'circle-color': {
+                            property: 'open_or_boarded',
+                            type: 'categorical',
+                            stops: [
+                                ['Open', '#FECC5C'],
+                                ['Boarded', '#FD8D3C']
+                            ]
+                        },
+                        'circle-opacity': 0.8,
+                        'circle-radius': {
+                            'base': 1.75,
+                            'stops': [[12, 2], [22, 180]]
+                        },
+                    }
+                });
 
-        }); // end d3.json
+                // Create a popup, but don't add it to the map yet.
+                var popup = new mapboxgl.Popup({
+                    closeButton: false,
+                    closeOnClick: false
+                });
+
+                map.on('mouseenter', 'homes', function(e) {
+                    // Change the cursor style as a UI indicator.
+                    map.getCanvas().style.cursor = 'pointer';
+
+                    // Populate the popup and set its coordinates
+                    // based on the feature found.
+                    popup.setLngLat(e.features[0].geometry.coordinates)
+                        .setHTML(e.features[0].properties.vacant_fires)
+                        .addTo(map);
+                });
+
+                map.on('mouseleave', 'homes', function() {
+                    map.getCanvas().style.cursor = '';
+                    popup.remove();
+                });
+
+            }); // end d3.json
 
         }); // end map.on('load')
+    }
+   
 
     </script>
 
 
+     <div id='map' style=' height: 100%; width: 50%; margin-left: 2.5%;'></div>
+
+
+
+
+
+
+
+    </section>
+
+    <section id="sources">
+    <div>
+        <p>
+        Created as a final project for I247 - Information Visualization and Presentation.
+        </p>
+        <p>
+        The Github code for this project can be found <a href="https://github.com/carinasauter/InfoVizfinal">here</a>.
+        </p>
+        <p>
+        Team members: <a href="https://www.linkedin.com/in/lizlee0225/">Liz Lee</a>, <a href="https://uraza.me/">Usman Raza</a> and <a href="http://www.carinasauter.com">Carina Sauter</a>
+        </p>
+    </div>  
     </section>
 
 </body>
