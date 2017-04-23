@@ -8,6 +8,11 @@ var map = new mapboxgl.Map({
 
 var center_lat = 41.834082;
 
+document.getElementById("address").addEventListener("keypress", function(event) {
+    if (event.keyCode == 13) {
+        document.getElementById("showlocation").click();
+    }
+});
 
 // add map controls
 // map.addControl(new mapboxgl.NavigationControl());
@@ -47,7 +52,7 @@ map.on('load', function() {
                     "type": "Feature",
                     "geometry": {
                         "type": "Point",
-                        "coordinates": [0, 0]
+                        "coordinates": [-87.622498, 41.834082]
                     }
                 }]
             }
