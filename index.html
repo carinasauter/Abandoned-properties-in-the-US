@@ -207,8 +207,233 @@
 
     </div>
 
+    <div id='map' style=' height: 70%; width: 50%; margin-top: 2%'></div>
+
 
     <script type="text/javascript">
+
+    mapboxgl.accessToken = 'pk.eyJ1IjoiY2FyaW5hc2F1dGVyIiwiYSI6ImNqMWpsZzdpczAxbGgyeW9hMTlyc29qY3kifQ.zJT88QY64l6lEkgvby2CFQ';
+    var map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/mapbox/light-v9',
+        center:[-87.622498, 41.834082],
+        zoom: 9
+    });
+
+    var center_lat = 41.834082;
+
+
+    // add map controls
+    map.addControl(new mapboxgl.NavigationControl());
+
+    // function to call once the map has loaded
+    map.on('load', function() {
+        console.log('map loaded!');
+
+        // we'll use d3.json to load the point data asynchronously
+        d3.json('data/abandoned_chicago.geojson', function(error, data) {
+
+            // report an error if their was a problem getting the geojson data
+            if (error) throw error;
+
+            // filter out data with no geometry, otherwise MapboxGL throws an error and won't load data
+            data.features = data.features.filter(function(d) {
+                return d.geometry;
+            });
+
+
+            // add the source to the map styles
+            map.addSource('homes', {
+                type: 'geojson',
+                'data': data,
+                //cluster: true,
+                // clusterRadius: 10,
+                // clusterMaxZoom: 12
+            });
+
+
+
+            map.addSource('centerpoint',{
+                'type': 'geojson',
+                "data": {
+                    "type": "FeatureCollection",
+                    "features": [{
+                        "type": "Feature",
+                        "geometry": {
+                            "type": "Point",
+                            "coordinates": [0, 0]
+                        }
+                    }]
+                }
+            });
+
+            map.addLayer({
+                id: 'centerpoint',
+                type: 'circle',
+                source: 'centerpoint',
+                'layout': {
+                    'visibility': 'none'
+                },
+                'paint': {
+                    'circle-color': '#000000'
+                }
+            });
+
+
+
+            var createGeoJSONCircle = function(center, radiusInKm, points) {
+                if(!points) points = 64;
+
+                var coords = {
+                    latitude: center[1],
+                    longitude: center[0]
+                };
+
+                var km = radiusInKm;
+
+                var ret = [];
+                var distanceX = km/(111.320*Math.cos(coords.latitude*Math.PI/180));
+                var distanceY = km/110.574;
+
+                var theta, x, y;
+                for(var i=0; i<points; i++) {
+                    theta = (i/points)*(2*Math.PI);
+                    x = distanceX*Math.cos(theta);
+                    y = distanceY*Math.sin(theta);
+
+                    ret.push([coords.longitude+x, coords.latitude+y]);
+                }
+                ret.push(ret[0]);
+
+                return {
+                    "type": "geojson",
+                    "data": {
+                        "type": "FeatureCollection",
+                        "features": [{
+                            "type": "Feature",
+                            "geometry": {
+                                "type": "Polygon",
+                                "coordinates": [ret]
+                            }
+                        }]
+                    }
+                };
+            };
+
+            const metersToPixelsAtMaxZoom = (meters, latitude) =>
+            meters / 0.075 / Math.cos(latitude * Math.PI / 180)
+
+
+            // add the map layers
+
+            map.addLayer({
+                id: 'yellow',
+                type: 'circle',
+                source: 'homes',
+                'layout': {},
+                'paint': {
+                    'circle-color': 'yellow',
+                    'circle-opacity': 0.3,
+                    "circle-radius": {
+                        stops: [
+                        [0, 0],
+                        [20, metersToPixelsAtMaxZoom(137.16, center_lat)]
+                        ],
+                        base: 2
+                    },
+                }
+            });
+
+
+
+            map.addLayer({
+                id: 'orange',
+                type: 'circle',
+                source: 'homes',
+                'layout': {},
+                'paint': {
+                    'circle-color': 'orange',
+                    'circle-opacity': 0.3,
+                    "circle-radius": {
+                        stops: [
+                        [0, 0],
+                        [20, metersToPixelsAtMaxZoom(91.44, center_lat)]
+                        ],
+                        base: 2
+                    },
+                }
+            });
+
+
+            map.addLayer({
+                id: 'red',
+                type: 'circle',
+                source: 'homes',
+                'layout': {},
+                'paint': {
+                    'circle-color': 'red',
+                    'circle-opacity': 0.3,
+                    "circle-radius": {
+                        stops: [
+                        [0, 0],
+                        [20, metersToPixelsAtMaxZoom(45.72, center_lat)]
+                        ],
+                        base: 2
+                    },
+                }
+            });
+
+
+
+            map.addLayer({
+                id: 'homes',
+                type: 'circle',
+                source: 'homes',
+                'layout': {},
+                'paint': {
+                    'circle-color': 'grey',
+                    'circle-opacity': 0.8,
+                    'circle-radius': {
+                        'base': 1.75,
+                        'stops': [[12, 2], [22, 180]]
+                    },
+                }
+            });
+
+
+            // Create a popup, but don't add it to the map yet.
+            var popup = new mapboxgl.Popup({
+                closeButton: false,
+                closeOnClick: false
+            });
+
+            map.on('mouseenter', 'homes', function(e) {
+                // Change the cursor style as a UI indicator.
+                map.getCanvas().style.cursor = 'pointer';
+
+                var tooltip_fire = 'Abandoned due to fire:  ';
+                var tooltip_date = 'Date of service request:  ';
+                var tooltip_boarded ='Open or boarded:  ';
+                var tooltip_occupied = 'Vacant or occupied:  ';
+
+                var table_ini = '<table><tr><th>';
+
+                
+                popup.setLngLat(e.features[0].geometry.coordinates)
+                    .setHTML(table_ini.concat(tooltip_date,'</th><th>',e.features[0].properties.date_service_received,'</th></tr><tr><th>',tooltip_fire,'</th><th>',e.features[0].properties.vacant_fire,'</th></tr>','<tr><th>',tooltip_boarded,'</th><th>',e.features[0].properties.open_or_boarded,'<tr><th>',tooltip_occupied,"</th><th>",e.features[0].properties.vacant_or_occupied,'</th></tr></table>'))
+                    .addTo(map);
+            });
+
+            map.on('mouseleave', 'homes', function() {
+                map.getCanvas().style.cursor = '';
+                popup.remove();
+            });
+
+        }); // end d3.json
+
+    }); // end map.on('load')
+
+
 
     function myFunction() {
         var address = document.getElementById('address').value;
@@ -244,298 +469,30 @@
             var center_lon = center_loc.results[0].geometry.location.lng;
 
 
-            mapboxgl.accessToken = 'pk.eyJ1IjoiY2FyaW5hc2F1dGVyIiwiYSI6ImNqMWpsZzdpczAxbGgyeW9hMTlyc29qY3kifQ.zJT88QY64l6lEkgvby2CFQ';
-            var map = new mapboxgl.Map({
-                container: 'map',
-                style: 'mapbox://styles/mapbox/light-v9',
-                center:[center_lon, center_lat],
-                zoom: 14
+            map.getSource('centerpoint').setData({
+                "type": "FeatureCollection",
+                "features": [{
+                    "type": "Feature",
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [center_lon, center_lat]
+                    }
+                }]
             });
 
-            //map.flyTo({})
 
-            // add map controls
-            map.addControl(new mapboxgl.NavigationControl());
-            // map.addControl(new mapboxgl.ScaleControl({
-            //     maxWidth: 80,
-            //     unit: 'imperial'
-            // }));
+            map.setLayoutProperty('centerpoint', 'visibility', 'visible');
 
-            // function to call once the map has loaded
-            map.on('load', function() {
-                console.log('map loaded!');
 
-                // we'll use d3.json to load the point data asynchronously
-                d3.json('data/abandoned_chicago.geojson', function(error, data) {
+            map.flyTo({
+                center: [center_lon, center_lat],
 
-                    // report an error if their was a problem getting the geojson data
-                    if (error) throw error;
-
-                    // filter out data with no geometry, otherwise MapboxGL throws an error and won't load data
-                    data.features = data.features.filter(function(d) {
-                        return d.geometry;
-                    });
+                zoom: 14,
+                speed: 0.5
+            })
 
 
 
-                    // add the centerpoint (user input)
-
-                    map.addSource('centerpoint',{
-                        'type': 'geojson',
-                        "data": {
-                            "type": "FeatureCollection",
-                            "features": [{
-                                "type": "Feature",
-                                "geometry": {
-                                    "type": "Point",
-                                    "coordinates": [center_lon, center_lat]
-                                }
-                            }]
-                        }
-                    });
-
-                    map.addLayer({
-                        id: 'centerpoint',
-                        type: 'circle',
-                        source: 'centerpoint',
-                        'layout': {},
-                        'paint': {
-                            'circle-color': '#000000'
-                        }
-                    });
-
-
-                    var createGeoJSONCircle = function(center, radiusInKm, points) {
-                        if(!points) points = 64;
-
-                        var coords = {
-                            latitude: center[1],
-                            longitude: center[0]
-                        };
-
-                        var km = radiusInKm;
-
-                        var ret = [];
-                        var distanceX = km/(111.320*Math.cos(coords.latitude*Math.PI/180));
-                        var distanceY = km/110.574;
-
-                        var theta, x, y;
-                        for(var i=0; i<points; i++) {
-                            theta = (i/points)*(2*Math.PI);
-                            x = distanceX*Math.cos(theta);
-                            y = distanceY*Math.sin(theta);
-
-                            ret.push([coords.longitude+x, coords.latitude+y]);
-                        }
-                        ret.push(ret[0]);
-
-                        return {
-                            "type": "geojson",
-                            "data": {
-                                "type": "FeatureCollection",
-                                "features": [{
-                                    "type": "Feature",
-                                    "geometry": {
-                                        "type": "Polygon",
-                                        "coordinates": [ret]
-                                    }
-                                }]
-                            }
-                        };
-                    };
-
-
-                    // // if using single point for radius stuff
-
-                    // // 450 ft = 137.16 m
-                    // // 300 ft = 91.44 m
-                    // // 150 ft = 45.72 m
-
-                    // map.addSource("polygon", createGeoJSONCircle([center_lon, center_lat], 0.13716));
-                    // map.addLayer({
-                    //     "id": "polygon",
-                    //     "type": "fill",
-                    //     "source": "polygon",
-                    //     "layout": {},
-                    //     "paint": {
-                    //         "fill-color": "yellow",
-                    //         "fill-opacity": 0.3
-                    //     }
-                    // });
-
-                    // map.addSource("polygon2", createGeoJSONCircle([center_lon, center_lat], 0.09144));
-                    // map.addLayer({
-                    //     "id": "polygon2",
-                    //     "type": "fill",
-                    //     "source": "polygon2",
-                    //     "layout": {},
-                    //     "paint": {
-                    //         "fill-color": "orange",
-                    //         "fill-opacity": 0.3
-                    //     }
-                    // });
-
-                    // map.addSource("polygon3", createGeoJSONCircle([center_lon, center_lat], 0.04572));
-                    // map.addLayer({
-                    //     "id": "polygon3",
-                    //     "type": "fill",
-                    //     "source": "polygon3",
-                    //     "layout": {},
-                    //     "paint": {
-                    //         "fill-color": "red",
-                    //         "fill-opacity": 0.3
-                    //     }
-                    // });
-
-                    const metersToPixelsAtMaxZoom = (meters, latitude) =>
-                    meters / 0.075 / Math.cos(latitude * Math.PI / 180)
-
-
-                    // add the source to the map styles
-                    map.addSource('homes', {
-                        type: 'geojson',
-                        'data': data,
-                        // cluster: true,
-                        // clusterRadius: 10,
-                        // clusterMaxZoom: 12
-                    });
-
-
-                    // add the map layers
-
-                    map.addLayer({
-                        id: 'yellow',
-                        type: 'circle',
-                        source: 'homes',
-                        'layout': {},
-                        'paint': {
-                            'circle-color': 'yellow',
-                            'circle-opacity': 0.3,
-                            "circle-radius": {
-                                stops: [
-                                [0, 0],
-                                [20, metersToPixelsAtMaxZoom(137.16, center_lat)]
-                                ],
-                                base: 2
-                            },
-                        }
-                    });
-
-
-
-                    map.addLayer({
-                        id: 'orange',
-                        type: 'circle',
-                        source: 'homes',
-                        'layout': {},
-                        'paint': {
-                            'circle-color': 'orange',
-                            'circle-opacity': 0.3,
-                            "circle-radius": {
-                                stops: [
-                                [0, 0],
-                                [20, metersToPixelsAtMaxZoom(91.44, center_lat)]
-                                ],
-                                base: 2
-                            },
-                        }
-                    });
-
-
-                    map.addLayer({
-                        id: 'red',
-                        type: 'circle',
-                        source: 'homes',
-                        'layout': {},
-                        'paint': {
-                            'circle-color': 'red',
-                            'circle-opacity': 0.3,
-                            "circle-radius": {
-                                stops: [
-                                [0, 0],
-                                [20, metersToPixelsAtMaxZoom(45.72, center_lat)]
-                                ],
-                                base: 2
-                            },
-                        }
-                    });
-
-
-                //     map.addLayer({
-                //     id: 'homes',
-                //     type: 'circle',
-                //     source: 'homes',
-                //     'layout': {},
-                //     'paint': {
-                //         'circle-color': {
-                //             property: 'open_or_boarded',
-                //             type: 'categorical',
-                //             stops: [
-                //                 ['Open', '#000000'],
-                //                 ['Boarded', '#000000']
-                //             ]
-                //         },
-                //         'circle-opacity': 1,
-                //         'circle-radius': {
-                //             'base': 1.75,
-                //             'stops': [[12, 2], [22, 180]]
-                //         },
-                //     }
-                // });
-
-
-                    map.addLayer({
-                        id: 'homes',
-                        type: 'circle',
-                        source: 'homes',
-                        'layout': {},
-                        'paint': {
-                            'circle-color': 'grey',
-                            'circle-opacity': 0.8,
-                            'circle-radius': {
-                                'base': 1.75,
-                                'stops': [[12, 2], [22, 180]]
-                            },
-                        }
-                    });
-
-
-                    // This is the tooltip
-
-                    // Create a popup, but don't add it to the map yet.
-                    var popup = new mapboxgl.Popup({
-                        closeButton: false,
-                        closeOnClick: false
-                    });
-
-                    map.on('mouseenter', 'homes', function(e) {
-                        // Change the cursor style as a UI indicator.
-                        map.getCanvas().style.cursor = 'pointer';
-
-                        // Populate the popup and set its coordinates
-                        // based on the feature found.
-
-                        var tooltip_fire = 'Abandoned due to fire:  ';
-                        var tooltip_date = 'Date of service request:  ';
-                        var tooltip_boarded ='Open or boarded:  ';
-                        var tooltip_occupied = 'Vacant or occupied:  ';
-
-                        var table_ini = '<table><tr><th>';
-                        
-                        popup.setLngLat(e.features[0].geometry.coordinates)
-                            .setHTML(table_ini.concat(tooltip_date,'</th><th>',e.features[0].properties.date_service_received,'</th></tr><tr><th>',tooltip_fire,'</th><th>',e.features[0].properties.vacant_fire,'</th></tr>','<tr><th>',tooltip_boarded,'</th><th>',e.features[0].properties.open_or_boarded,'<tr><th>',tooltip_occupied,"</th><th>",e.features[0].properties.vacant_or_occupied,'</th></tr></table>'))
-                            .addTo(map);
-                    });
-
-                    map.on('mouseleave', 'homes', function() {
-                        map.getCanvas().style.cursor = '';
-                        popup.remove();
-
-                    }); //end tooltip
-
-
-                }); // end d3.json
-            }); // end map.on('load')
         }); // close client
 
     } // close function
@@ -543,100 +500,15 @@
 
     function myFunction2 () {
 
-        mapboxgl.accessToken = 'pk.eyJ1IjoiY2FyaW5hc2F1dGVyIiwiYSI6ImNqMWpsZzdpczAxbGgyeW9hMTlyc29qY3kifQ.zJT88QY64l6lEkgvby2CFQ';
-        var map = new mapboxgl.Map({
-            container: 'map',
-            style: 'mapbox://styles/mapbox/light-v9',
+        map.flyTo({
             center:[-87.622498, 41.834082],
-            zoom: 9
-        });
+            zoom: 9,
+            speed: 0.5
+        })
+
+        map.setLayoutProperty('centerpoint', 'visibility', 'none');
 
 
-        // add map controls
-        map.addControl(new mapboxgl.NavigationControl());
-
-        // function to call once the map has loaded
-        map.on('load', function() {
-            console.log('map loaded!');
-
-            // we'll use d3.json to load the point data asynchronously
-            d3.json('data/abandoned_chicago.geojson', function(error, data) {
-
-                // report an error if their was a problem getting the geojson data
-                if (error) throw error;
-
-                // filter out data with no geometry, otherwise MapboxGL throws an error and won't load data
-                data.features = data.features.filter(function(d) {
-                    return d.geometry;
-                });
-
-
-                // add the source to the map styles
-                map.addSource('homes', {
-                    type: 'geojson',
-                    'data': data,
-                    // cluster: true,
-                    // clusterRadius: 10,
-                    // clusterMaxZoom: 12
-                });
-
-                // add the map layer
-                map.addLayer({
-                    id: 'homes',
-                    type: 'circle',
-                    source: 'homes',
-                    'layout': {},
-                    'paint': {
-                        'circle-color': {
-                            property: 'open_or_boarded',
-                            type: 'categorical',
-                            stops: [
-                                ['Open', '#FECC5C'],
-                                ['Boarded', '#FD8D3C']
-                            ]
-                        },
-                        'circle-opacity': 0.8,
-                        'circle-radius': {
-                            'base': 1.75,
-                            'stops': [[12, 2], [22, 180]]
-                        },
-                    }
-                });
-
-                // Create a popup, but don't add it to the map yet.
-                var popup = new mapboxgl.Popup({
-                    closeButton: false,
-                    closeOnClick: false
-                });
-
-                map.on('mouseenter', 'homes', function(e) {
-                    // Change the cursor style as a UI indicator.
-                    map.getCanvas().style.cursor = 'pointer';
-
-                    // Populate the popup and set its coordinates
-                    // based on the feature found.
-
-                    var tooltip_fire = 'Abandoned due to fire:  ';
-                    var tooltip_date = 'Date of service request:  ';
-                    var tooltip_boarded ='Open or boarded:  ';
-                    var tooltip_occupied = 'Vacant or occupied:  ';
-
-                    var table_ini = '<table><tr><th>';
-
-                    
-                    popup.setLngLat(e.features[0].geometry.coordinates)
-                        .setHTML(table_ini.concat(tooltip_date,'</th><th>',e.features[0].properties.date_service_received,'</th></tr><tr><th>',tooltip_fire,'</th><th>',e.features[0].properties.vacant_fire,'</th></tr>','<tr><th>',tooltip_boarded,'</th><th>',e.features[0].properties.open_or_boarded,'<tr><th>',tooltip_occupied,"</th><th>",e.features[0].properties.vacant_or_occupied,'</th></tr></table>'))
-                        .addTo(map);
-                });
-
-                map.on('mouseleave', 'homes', function() {
-                    map.getCanvas().style.cursor = '';
-                    popup.remove();
-                });
-
-            }); // end d3.json
-
-        }); // end map.on('load')
     }
    
 
@@ -645,7 +517,7 @@
 
 
 
-     <div id='map' style=' height: 70%; width: 50%; margin-top: 2%'></div>
+
 
 
     </section>
