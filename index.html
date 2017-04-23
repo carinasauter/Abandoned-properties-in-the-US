@@ -210,7 +210,6 @@
 
     <script type="text/javascript">
 
-
     function myFunction() {
         var address = document.getElementById('address').value;
         var google_endpoint = 'https://maps.googleapis.com/maps/api/geocode/json?';
@@ -244,8 +243,6 @@
             var center_lat = center_loc.results[0].geometry.location.lat;
             var center_lon = center_loc.results[0].geometry.location.lng;
 
-            // console.log(center_lat);
-            // console.log(center_lon);
 
             mapboxgl.accessToken = 'pk.eyJ1IjoiY2FyaW5hc2F1dGVyIiwiYSI6ImNqMWpsZzdpczAxbGgyeW9hMTlyc29qY3kifQ.zJT88QY64l6lEkgvby2CFQ';
             var map = new mapboxgl.Map({
@@ -254,6 +251,8 @@
                 center:[center_lon, center_lat],
                 zoom: 14
             });
+
+            //map.flyTo({})
 
             // add map controls
             map.addControl(new mapboxgl.NavigationControl());
@@ -500,7 +499,6 @@
                         }
                     });
 
-                    
 
                     // This is the tooltip
 
@@ -511,14 +509,22 @@
                     });
 
                     map.on('mouseenter', 'homes', function(e) {
-                    // Change the cursor style as a UI indicator.
+                        // Change the cursor style as a UI indicator.
                         map.getCanvas().style.cursor = 'pointer';
 
                         // Populate the popup and set its coordinates
                         // based on the feature found.
+
+                        var tooltip_fire = 'Abandoned due to fire:  ';
+                        var tooltip_date = 'Date of service request:  ';
+                        var tooltip_boarded ='Open or boarded:  ';
+                        var tooltip_occupied = 'Vacant or occupied:  ';
+
+                        var table_ini = '<table><tr><th>';
+                        
                         popup.setLngLat(e.features[0].geometry.coordinates)
-                        .setHTML(e.features[0].properties.vacant_fires)
-                        .addTo(map);
+                            .setHTML(table_ini.concat(tooltip_date,'</th><th>',e.features[0].properties.date_service_received,'</th></tr><tr><th>',tooltip_fire,'</th><th>',e.features[0].properties.vacant_fire,'</th></tr>','<tr><th>',tooltip_boarded,'</th><th>',e.features[0].properties.open_or_boarded,'<tr><th>',tooltip_occupied,"</th><th>",e.features[0].properties.vacant_or_occupied,'</th></tr></table>'))
+                            .addTo(map);
                     });
 
                     map.on('mouseleave', 'homes', function() {
@@ -609,8 +615,17 @@
 
                     // Populate the popup and set its coordinates
                     // based on the feature found.
+
+                    var tooltip_fire = 'Abandoned due to fire:  ';
+                    var tooltip_date = 'Date of service request:  ';
+                    var tooltip_boarded ='Open or boarded:  ';
+                    var tooltip_occupied = 'Vacant or occupied:  ';
+
+                    var table_ini = '<table><tr><th>';
+
+                    
                     popup.setLngLat(e.features[0].geometry.coordinates)
-                        .setHTML(e.features[0].properties.vacant_fires)
+                        .setHTML(table_ini.concat(tooltip_date,'</th><th>',e.features[0].properties.date_service_received,'</th></tr><tr><th>',tooltip_fire,'</th><th>',e.features[0].properties.vacant_fire,'</th></tr>','<tr><th>',tooltip_boarded,'</th><th>',e.features[0].properties.open_or_boarded,'<tr><th>',tooltip_occupied,"</th><th>",e.features[0].properties.vacant_or_occupied,'</th></tr></table>'))
                         .addTo(map);
                 });
 
