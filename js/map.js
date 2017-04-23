@@ -10,7 +10,7 @@ var center_lat = 41.834082;
 
 
 // add map controls
-map.addControl(new mapboxgl.NavigationControl());
+// map.addControl(new mapboxgl.NavigationControl());
 
 // function to call once the map has loaded
 map.on('load', function() {
@@ -110,7 +110,7 @@ map.on('load', function() {
         meters / 0.075 / Math.cos(latitude * Math.PI / 180)
 
 
-        // add the map layers
+        // add the impact layers
 
         map.addLayer({
             id: 'yellow',
@@ -120,6 +120,9 @@ map.on('load', function() {
             'paint': {
                 'circle-color': 'yellow',
                 'circle-opacity': 0.3,
+                'circle-stroke-width': 0.1,
+                'circle-stroke-color': 'orange',
+                'circle-stroke-opacity': 0.8,
                 "circle-radius": {
                     stops: [
                     [0, 0],
@@ -129,7 +132,6 @@ map.on('load', function() {
                 },
             }
         });
-
 
 
         map.addLayer({
