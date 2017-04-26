@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1,user-scalable=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+<!--    <script src="//d3js.org/d3.v3.min.js"></script>-->
+    <!-- Load the D3 library -->
+    <script src="https://d3js.org/d3.v4.js" charset="utf-8"></script>
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.35.0/mapbox-gl.js'></script>
+    <!-- NEW: add turf.js  -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Turf.js/2.0.2/turf.min.js"></script>
+    <!-- <script type="text/javascript" src="js/geojson.min.js"></script> -->
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.35.0/mapbox-gl.css' rel='stylesheet' />
+
+    <title>Infoviz Final Project - Team 3</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+
+    <!-- Theme CSS -->
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+
+</head>
+<body id='page-top'>
+
+	<nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
+                </button>
+                <a class="navbar-brand page-scroll" href="#page-top">Abandoned properties</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a class="page-scroll" href="#firstsection">What is it?</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#secondsection">Why is it bad?</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#portfolio">Show me</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#thirdsection">More</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+
+	<header>
+        <div class="header-content">
+            <div class="header-content-inner">
+                <h1 id="homeHeading">Abandoned Properties</h1>
+                <h1 id ='homeHeading'>in the US</h1>
+                <hr class="light">
+                <a href="#firstsection" class="btn btn-primary btn-xl page-scroll">Scroll down to start</a>
+            </div>
+        </div>
+	</header>
+
+	<section id='firstsection'>
+        <div id="sec_property_type">
+            <h2>
+                COMMON TYPES OF ABANDONED PROPERTIES
+            </h2>
+            <div id="icons_property">
+                <style>
+                    /* Tooltip container */
+                    .iconstooltip {
+                        position: relative;
+                        display: inline-block;
+                    }
+
+                    /* Tooltip text */
+                    .iconstooltip .iconstooltiptext {
+                        visibility: hidden;
+                        width: 350px;
+                        background-color: #343434;
+                        color: #eee;
+                        text-align: center;
+                        padding: 8px;
+                        border-radius: 5px;
+                        font-family: 'Open Sans', sans-serif;
+                        font-size: 13px;
+
+                        /* Position the tooltip text - see examples below! */
+                        /*                        position: absolute;*/
+                        position: absolute;
+                        top: 180px;
+                        left: -80px;
+                        /*                        (event.pageY-45)+"px").style("left",(event.pageX+5)+"px"*/
+                        z-index: 1;
+                    }
+
+                    /* Show the tooltip text when you mouse over the tooltip container */
+                    .iconstooltip:hover .iconstooltiptext {
+                        visibility: visible;
+                    }
+                </style>
+                <div>
+                    <figure class="iconstooltip">
+                        <img src="assets/icon_house_circle.png" hspace="10px" alt="Houses">
+                        <span class="iconstooltiptext">Top 10 cities of with highest vacancy rates in USA have near 110,000 abandoned residential properties (2016). Some of these cities have residential vacancy rates as high as 18.6%.
+                            <img src="assets/abandoned_house_tooltip.jpeg" width="340px" height="auto">
+                        </span>
+                        <figcaption>
+                            Houses
+                        </figcaption>
+                    </figure>
+                </div>
+                <div>
+                    <figure class="iconstooltip">
+                        <img src="assets/icon_gov_building_circle.png" hspace="10px" alt="Government Buildings">
+                        <span class="iconstooltiptext">Fort Ord, USA is the large abandoned military base in the world, spanning 44 square miles. It was closed down in 1994 and cleaning operations continue. According to one report, over 50,000 unexploded ordinances have been collected till 2014 and the process is likely to continue till 2022.
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Fort_Ord_Soldiers_Club_HABS.jpg" width="340px" height="auto">
+                            Fort Ord Soldiers Club (1992), by HABS, in Public Domain
+                        </span>
+                        <figcaption>
+                            Govt. Buildings
+                        </figcaption>
+                    </figure>
+                </div>
+                <div>
+                    <figure class="iconstooltip">
+                        <img src="assets/icon_factory_circle.png" hspace="10px">
+                        <span class="iconstooltiptext">When robots take over manual work or cheap labor from other parts of the world attracts manufcaturing operations, whole factories get abandoned and thousands of jobs are lost. Factory employments have gone down by one third, from 17.6 million to 12.3 million, since 1998.
+                            <img src="assets/abandoned_factory_tooltip.jpeg" width="340px" height="auto">
+                        </span>
+                        <figcaption>
+                            Factories
+                        </figcaption>
+                    </figure>
+                </div>
+                <div>
+                    <figure class="iconstooltip">
+                        <img src="assets/icon_station_circle.png" hspace="10px">
+                        <span class="iconstooltiptext">Numerous train stations lay abandoned or closed across America. For example, this Citcinati Subway (pictured below) was initiated in 1920s and eventually cancelled during the great depression after WWI. Initially planned to be completed with $6 million, it would now cost near $100 million to revive this system for subway use.
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/c/ce/Cincinnati_Subway_-_Race_St._Station.jpg" width="340px" height="auto">
+                            Abandoned under Central Parkway as part of the Cincinnati Subway System, by Jonathan Warren licensed under CC BY-SA 3.0
+                        </span>
+                        <figcaption>
+                            Stations
+                        </figcaption>
+                    </figure>
+                </div>
+                <div>
+                    <figure class="iconstooltip">
+                        <img src="assets/icon_park_circle.png" hspace="10px">
+                        <span class="iconstooltiptext">Several hundred amusement parks lay barren Nationwide for one reason or another. This Six Flags park in New Orleans covering 140 acre land, was destroyed by hurriace Katrina in 2005 and is closed since, due to exhorbitant repair costs. It is in extremely poor condition and has become a safety hazard.
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/3/34/Six_Flags_NOLA_Shoots_and_Ruins_Reflections.jpg" width="340px" height="auto">
+                            Six Flags New Orleans, abandoned amusement park, by John Von Curd licensed under CC BY 2.0
+                        </span>
+                        <figcaption>
+                            Parks
+                        </figcaption>
+                    </figure>
+                </div>
+
+            </div>            
+        </div>
+	</section>
+
+	<section id="secondsection">
+        <div id="sec_causes">
+            <h2>
+                WHY DO PROPERTIES GET ABANDONDED?
+            </h2>
+<!--            <img id="nav_img" src="assets/nav_causes.png" height="100%" width="76%">-->
+            <div id="causes_viz">  
+                <script>
+                    // The stacked bar chart is adapted from Mike Foster's workshop http://duspviz.mit.edu/d3-workshop/intro-to-d3/
+
+                    // New dataset read from CSV
+                    var popData = [];
+
+                    d3.csv("data/city_pop.csv", function(d) {
+                        return {
+                            city : d.city, // city name
+                            peak : +d.peak, // force population value to be number (+)
+                            now_pop: +d.now_pop // 2010 population
+                        };
+                    }, function(error, rows) { // catch error if error, read rows
+                        popData = rows; // set popData equal to rows
+                        console.log(popData);
+                        createVisualization(); // call function to create chart
+                    });
+
+
+                    function createVisualization(){
+                        // Width and height of SVG
+                        var w = 1180;
+                        var h = 300;
+
+                        // Get length of dataset
+                        var arrayLength = popData.length; // length of dataset
+                        var maxValue = d3.max(popData, function(d) { return +d.peak;} ); // get max value of our dataset
+                        var x_axisLength = w-50; // length of x-axis in our layout
+                        var y_axisLength = h-50; // length of y-axis in our layout
+
+                        // Create y scales
+                        var yScale = d3.scaleLinear()
+                        .domain([0, maxValue])
+                        .range([0, y_axisLength]);
+
+                        //Create SVG element
+                        var svg = d3.select("#causes_viz")
+                        .append("svg")
+                        .attr("width", w)
+                        .attr("height", h);
+
+                        // Select and generate rectangle elements
+                        svg.selectAll( "rect.peak" )
+                            .data( popData )
+                            .enter()
+                            .append("rect")
+                            .attr( "x", function(d,i){
+                            return (x_axisLength/arrayLength)*i + 30;  } )
+                            .attr( "y", function(d) {
+                            return h - yScale(d.peak);  } )
+                            .attr( "width", (x_axisLength/arrayLength)-5 )
+                            .attr( "height", function(d){
+                            return yScale(d.peak); })
+                            .attr( "fill", "#000")
+                        //                        .attr( "fill", "#778899")
+                            .attr("stroke", "orange") //"#D85F41") //"#DFD6D6") // lightblue
+                            .attr("stroke-width", "1px")
+                            .on("mouseover", function(d){
+                            return tooltip.style("visibility", "visible").html(d.city + "<br>" + "Peak population: " +d3.format(",")(d.peak) + "<br>" + 
+                                                                               "2010 Population: " + +d3.format(",")(d.now_pop));
+                        })
+                            .on("mousemove", function(d){
+                            return tooltip.style("top", (event.pageY-45)+"px").style("left",(event.pageX+5)+"px").html(d.city + "<br>" +
+                                                                                                                       "Peak population: " + d3.format(",")(d.peak) + "<br>" + "2010 Population: " + d3.format(",")(d.now_pop));
+                        })
+                            .on("mouseout", function(d){
+                            return tooltip.style("visibility", "hidden");
+                        });
+
+                        // create second stack
+                        svg.selectAll( "rect.now" )
+                            .data( popData )
+                            .enter()
+                            .append("rect")
+                            .attr( "x", function(d,i){
+                            return (x_axisLength/arrayLength)*i + 30;  } )
+                            .attr( "y", function(d) {
+                            return h - yScale(d.now_pop);  } )
+                            .attr( "width", (x_axisLength/arrayLength)-5 )
+                            .attr( "height", function(d){
+                            return yScale(d.now_pop); })
+                            .attr( "fill", "orange") //"#D85F41")
+                            .on("mouseover", function(d){
+                            return tooltip.style("visibility", "visible").html(d.city + "<br>" + "Peak population: " +d3.format(",")(d.peak) + "<br>" + 
+                                                                               "2010 Population: " + +d3.format(",")(d.now_pop));
+                        })
+                            .on("mousemove", function(d){
+                            return tooltip.style("top", (event.pageY-45)+"px").style("left",(event.pageX+5)+"px").html(d.city + "<br>" +
+                                                                                                                       "Peak population: " + d3.format(",")(d.peak) + "<br>" + "2010 Population: " + d3.format(",")(d.now_pop));
+                        })
+                            .on("mouseout", function(d){
+                            return tooltip.style("visibility", "hidden");
+                        });
+
+                        // Add axes
+                        svg.append("line")
+                            .attr("x1", 25)
+                            .attr("x2", 30 + x_axisLength)
+                            .attr("y1", h)
+                            .attr("y2", h)
+                            .attr("stroke-width", 2)
+                            .attr("stroke", "white");
+
+                        //                    svg.append("line")
+                        //                        .attr("x1", 25)
+                        //                        .attr("x2", 25)
+                        //                        .attr("y1", h-y_axisLength)
+                        //                        .attr("y2", h)
+                        //                        .attr("stroke-width", 1)
+                        //                        .attr("stroke", "white");
+
+                        svg.append("text")
+                            .attr("class", "y label")
+                            .attr("text-anchor", "end")
+                            .text("Population")
+                            .attr("transform", "translate(15, 150) rotate(-90)");
+
+                        var tooltip = d3.select("body")
+                        .append("div")
+                        .style("position", "absolute")
+                        .style("font-family", "'Open Sans', sans-serif")
+                        .style("font-size", "12px")
+                        .style("color", "black")
+                        .style("background", "white")
+                        .style("padding", "4px")
+                        .style("border-radius", "6px")
+                        .style("opacity", 0.8)
+                        .style("border", "0px")
+                        .style("z-index", "10")
+                        .style("visibility", "hidden");
+                    };
+                </script>
+            </div>
+        </div>		
+	</section>
+    
+	<section id="thirdsection">
+		<div>
+			<p>Introduction/Description of Tableau graph</p>
+            <div class='tableauPlaceholder' id='viz1493193539435' style='position: relative'><noscript><a href='#'><img alt='Vacancy Rate Compared with Other City Characteristics ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Ab&#47;AbandonedEffects&#47;Story1_1&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='site_root' value='' /><param name='name' value='AbandonedEffects&#47;Story1_1' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Ab&#47;AbandonedEffects&#47;Story1_1&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1493193539435');                    var vizElement = divElement.getElementsByTagName('object')[0];                    vizElement.style.width='1370px';vizElement.style.height='837px';                    var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
+		</div>	
+	</section>
+
+    <section class="no-padding" id="portfolio">
+        <div class="container-fluid">
+            <div class="row no-gutter popup-gallery">
+                <div class="col-lg-4 col-sm-6">
+                    <div class="portfolio-box">
+                        <img src="img/portfolio/thumbnails/asset1.png" class="img-responsive" alt="">
+                        <div class="portfolio-box-caption">
+                            <div class="portfolio-box-caption-content">
+                                <div class="project-category text-faded">
+                                    Category
+                                </div>
+                                <div class="project-name">
+                                    Project Name
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-sm-6">
+                    <div class="portfolio-box">
+                        <img src="img/portfolio/thumbnails/asset1.png" class="img-responsive" alt="">
+                        <div class="portfolio-box-caption">
+                            <div class="portfolio-box-caption-content">
+                                <div class="project-category text-faded">
+                                    Category
+                                </div>
+                                <div class="project-name">
+                                    Project Name
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-sm-6">
+                    <div class="portfolio-box">
+                        <img src="img/portfolio/thumbnails/asset1.png" class="img-responsive" alt="">
+                        <div class="portfolio-box-caption">
+                            <div class="portfolio-box-caption-content">
+                                <div class="project-category text-faded">
+                                    Category
+                                </div>
+                                <div class="project-name">
+                                    Project Name
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-sm-6">
+                    <div class="portfolio-box">
+                        <img src="img/portfolio/thumbnails/asset1.png" class="img-responsive" alt="">
+                        <div class="portfolio-box-caption">
+                            <div class="portfolio-box-caption-content">
+                                <div class="project-category text-faded">
+                                    Category
+                                </div>
+                                <div class="project-name">
+                                    Project Name
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-sm-6">
+                    <div class="portfolio-box">
+                        <img src="img/portfolio/thumbnails/asset1.png" class="img-responsive" alt="">
+                        <div class="portfolio-box-caption">
+                            <div class="portfolio-box-caption-content">
+                                <div class="project-category text-faded">
+                                    Category
+                                </div>
+                                <div class="project-name">
+                                    Project Name
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-sm-6">
+                    <div class="portfolio-box">
+                        <img src="img/portfolio/thumbnails/asset1.png" class="img-responsive" alt="">
+                        <div class="portfolio-box-caption">
+                            <div class="portfolio-box-caption-content">
+                                <div class="project-category text-faded">
+                                    Category
+                                </div>
+                                <div class="project-name">
+                                    Project Name
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id='case_study'>
+
+    <div id='subheader'>
+    A case study on Chicago
+    </div>
+        
+    </section>
+    <section id="transition">
+        <div >
+        <p></p><br>
+            <img id='Timeline' class="center-block" style="max-width:75%;" src="img/Timeline6.jpg" alt="Chicago Timeline">
+        </div>
+    </section>
+    <section id="finalsection">
+    <div>
+    <p> Address: </p><br>
+    <input type="text" id="address"><br>
+    <button type='button' id='showlocation' onclick="myFunction()">Show me the location</button>
+    <button type='button' onclick ='myFunction2()'>Show me all</button>
+
+    </div>
+
+    <div id='map' style=' height: 70%; width: 50%; margin-top: 2%'></div>
+
+
+    <script src="js/map.js"></script>
+
+
+    </section>
+
+    <section id="sources">
+    <div>
+        <p>
+        Created as a final project for I247 - Information Visualization and Presentation.
+        </p>
+        <p>
+        The Github code for this project can be found <a href="https://github.com/carinasauter/InfoVizfinal">here</a>.
+        </p>
+        <p>
+        Team members: <a href="https://www.linkedin.com/in/lizlee0225/">Liz Lee</a>, <a href="https://uraza.me/">Usman Raza</a> and <a href="http://www.carinasauter.com">Carina Sauter</a>
+        </p>
+    </div>  
+    </section>
+
+</body>

@@ -525,3 +525,50 @@ tr {
   width: 100px;
 }
 
+/*Usman's CSS part*/
+
+#icons_property {
+    margin:20px;
+    text-align:center;
+}
+
+#icons_property > div {
+    display:inline-block;
+}
+
+img {
+
+}
+
+h2 {
+    text-align:center;
+    color:white;
+}
+
+figcaption {
+    color: white;
+}
+
+#sec_property_type {
+    /*    background-color:#778899;*/
+    background-color:#000;
+    padding: 5px;
+}
+
+#sec_causes {
+    background-color:#000;
+    /*    background-color:#778899;*/
+    text-align: center;
+    padding: 5px;
+}
+
+#nav_img {
+
+}
+
+text {
+    font-family: "Open Sans", sans-serif;
+    font-size: 12px;
+    fill: white;
+}
+/*ends here*/
