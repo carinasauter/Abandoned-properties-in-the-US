@@ -1,9 +1,10 @@
 mapboxgl.accessToken = 'pk.eyJ1IjoiY2FyaW5hc2F1dGVyIiwiYSI6ImNqMWpsZzdpczAxbGgyeW9hMTlyc29qY3kifQ.zJT88QY64l6lEkgvby2CFQ';
 var map = new mapboxgl.Map({
     container: 'map',
-    style: 'mapbox://styles/mapbox/light-v9',
+    style: 'mapbox://styles/mapbox/streets-v9',
     center:[-87.622498, 41.834082],
-    zoom: 9
+    zoom: 9,
+    scrollZoom: false
 });
 
 var center_lat = 41.834082;
@@ -14,8 +15,9 @@ document.getElementById("address").addEventListener("keypress", function(event) 
     }
 });
 
-// add map controls
-// map.addControl(new mapboxgl.NavigationControl());
+
+//add map controls
+map.addControl(new mapboxgl.NavigationControl());
 
 // function to call once the map has loaded
 map.on('load', function() {
@@ -221,6 +223,7 @@ map.on('load', function() {
             map.getCanvas().style.cursor = '';
             popup.remove();
         });
+        // disable drag and zoom handlers
 
     }); // end d3.json
 

@@ -200,18 +200,49 @@
     <section id="finalsection">
 
     <div>
-    <p> Address: </p><br>
+    <h3>311 Calls for abandoned homes in Chicago</h3>
+    <p>This map shows all 311 calls for abandoned homes that the city of Chicago received in 2016 and 2017. To explore the map, provide a location or double-click the map to zoom in.</p>
+    <p>
+    <i> eg: 'Ogden Park', '232 N Carpenter Street' </i>
+    </p>
     <input type="text" id="address"><br>
     <button type='button' id='showlocation' onclick="myFunction()">Show me the location</button>
-    <button type='button' onclick ='myFunction2()'>Show me all</button>
+    <button type='button' onclick ='myFunction2()'>Show me an overview</button>
 
     </div>
 
-    <div id='map' style=' height: 70%; width: 50%; margin-top: 2%'></div>
 
-
-    <script src="js/map.js"></script>
-
+    <div id='map' style='bottom:0; width:50%; height: 50%; margin-top: 2%; float: left';>
+        <script src="js/map.js"></script>
+    </div>
+    <div id = 'legend' style= 'margin-top: 2%; margin-left: 51%;'>
+        <p>
+        <b> The economic impact of abandoned homes on adjacent property</b>
+        <p>
+            Each point represents the location of a house that the City of Chicago received a 311 call for between 2016 and 2017.</p>
+        <p> <img src="/img/legend.png" style='float:left; width:20%; '> 
+        <p></p>
+        <table style='width: 300px; padding-left: 100%; float: left;'>
+            <caption>Impact on property prices</caption>
+            <thead>
+                <tr>
+                    <th>Radius</th><th>monetary impact</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>within 150 ft: </td><td>-$7,627</td>
+                </tr>
+                <tr>
+                    <td>within 300 ft: </td><td>-$6,819</td>
+                </tr>
+                <tr>
+                    <td>within 450 ft: </td><td>-$3,542</td>
+                </tr>
+            </tbody>
+        </table>  
+        </p>
+    </div>
 
     </section>
 

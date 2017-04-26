@@ -506,8 +506,22 @@ body {
 }
 
 .mapboxgl-popup {
+  /*float: left;*/
   max-width: 50%;
   font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
 }
 
+#legend {
+  margin-top: 2%;
+  margin-left: 2%;
+  padding-left: 2%;
+}
+
+table {
+  margin-left: 10px;
+}
+
+tr {
+  width: 100px;
+}
 
