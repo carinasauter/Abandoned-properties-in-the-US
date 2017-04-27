@@ -65,9 +65,7 @@ button {
 button:hover {
   background-color: #5A2A27;
   color: white;
-
 }
-
 
 
 header {
@@ -84,7 +82,12 @@ header {
   color: white;
 }
 
-#firstsection { 
+#definition {
+  background-color: #ffffff;
+  margin-top: 50px;
+}
+
+#types_section { 
     background-color: #ffffff;
 }
 
@@ -109,6 +112,62 @@ header {
   background-color: #5A2A27;
   height: 40vh;
 }
+
+.parent {
+  display: -webkit-flex;
+  display: flex;
+  height: 20vh;
+  margin-top:2%;
+}
+
+.left {
+  -webkit-flex: initial;
+  flex: initial;
+  width: 200px;
+  min-width: 100px;
+  /*background-color: yellow;*/
+}
+
+.pic1{
+  -webkit-flex: 1;
+  flex: 1;
+  /*background-color: orange;*/
+  display: flex;
+  justify-content: center; /* align horizontal */
+  align-items: center; /* align vertical */
+}
+
+.or{
+  -webkit-align-items: center;
+  align-items: center;
+  /*background-color: green;*/
+  width: 100px;
+  text-align: center;
+  vertical-align: middle;
+  align-items: center;
+  justify-content: center;
+  line-height: 20vh;
+}
+
+.pic2 {
+  -webkit-flex: 1;
+  flex: 1;
+  /*background-color: blue;*/
+  display: flex;
+  justify-content: center; /* align horizontal */
+  align-items: center; /* align vertical */
+}
+
+.right {
+  -webkit-flex: 1;
+  flex: 1;
+  width: 200px;
+  min-width: 100px;
+  /*background-color: red;*/
+}
+
+
+
 
 #subheader {
   color: #ffffff;
