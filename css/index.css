@@ -110,7 +110,7 @@ header {
 }
 
 #case_study {
-  background-color: #5A2A27;
+  /*background-color: #5A2A27;*/
   height: 40vh;
 }
 
@@ -173,33 +173,36 @@ header {
 
 
 #subheader {
-  color: #ffffff;
+  color: #000000;
   font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
   font-weight: 700;
   text-transform: uppercase;
   font-size: 40px;
   text-align: center;
   line-height: 40vh;
-  background-image: url('../img/chicago1.jpg');
-  background-attachment: fixed;
-  background-repeat: no-repeat;
-  background-size: cover;
+  /*background-image: url('../img/chicago1.jpg');*/
+  /*background-attachment: fixed;*/
+  /*background-repeat: no-repeat;*/
+  /*background-size: cover;*/
 }
 
 #subheader > div {
   height: 90px;
   line-height: 90px;
   text-align: center;
-  border: 2px dashed #f69c55;
+  /*border: 2px dashed #f69c55;*/
 }
 
 #sources {
   background-color: #5C4742;
-  height: 40vh;
+  height: 20vh;
+
+  text-align: center;
 }
 
 #sources > div {
   text-align: center;
+  justify-content: center;
   color: white;
 }
 
