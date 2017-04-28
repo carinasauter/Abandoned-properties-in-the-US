@@ -93,7 +93,6 @@ header {
 
 #secondsection { 
     background-color: #A5978B;
-    padding-left: 5%;
 }
 
 #thirdsection {
@@ -583,7 +582,7 @@ body {
 }
 
 table {
-  margin-left: 10px;
+    margin-left: 10px;
 }
 
 tr {
@@ -622,7 +621,6 @@ figcaption {
 
 #sec_causes {
     background-color:#000;
-        /*background-color:#778899;*/
     text-align: center;
     padding: 5px;
 }

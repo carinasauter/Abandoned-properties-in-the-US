@@ -227,12 +227,17 @@
     </section>
 
     <section id="secondsection">
+        <h2>
+            <i>Property abandonment is a symptom of underlying disease</i>
+        </h2>
         <div id="sec_causes">
-            <h2>
-                WHY DO PROPERTIES GET ABANDONDED?
-            </h2>
-<!--            <img id="nav_img" src="assets/nav_causes.png" height="100%" width="76%">-->
-            <div id="causes_viz">  
+            <div style="display: inline-block; width: 25%; height: 300px; line-height: 300px; vertical-align: middle;">
+                <span style="display: inline-block; vertical-align: middle; line-height: normal; padding: 15px;">
+                <font color="#fff" face="verdana">Gradual reduction in populace leaves homes and other properties vacant. The cities shown on the left are ones that have lost at least 20% of their population since 1950. Detroit, MI presents a glaring example with its population having declined by 62% since 1950 after its automobile industry suffered global competition.
+                </font>
+                </span>
+            </div>
+            <div id="shrinking_pop" style="display: inline-block; height: 300px; vertical-align: middle;">  
                 <script>
                     // The stacked bar chart is adapted from Mike Foster's workshop http://duspviz.mit.edu/d3-workshop/intro-to-d3/
 
@@ -254,7 +259,7 @@
 
                     function createVisualization(){
                         // Width and height of SVG
-                        var w = 1180;
+                        var w = 650;
                         var h = 300;
 
                         // Get length of dataset
@@ -269,7 +274,7 @@
                         .range([0, y_axisLength]);
 
                         //Create SVG element
-                        var svg = d3.select("#causes_viz")
+                        var svg = d3.select("#shrinking_pop")
                         .append("svg")
                         .attr("width", w)
                         .attr("height", h);
@@ -287,8 +292,7 @@
                             .attr( "height", function(d){
                             return yScale(d.peak); })
                             .attr( "fill", "#000")
-                        //                        .attr( "fill", "#778899")
-                            .attr("stroke", "orange") //"#D85F41") //"#DFD6D6") // lightblue
+                            .attr("stroke", "orange")
                             .attr("stroke-width", "1px")
                             .on("mouseover", function(d){
                             return tooltip.style("visibility", "visible").html(d.city + "<br>" + "Peak population: " +d3.format(",")(d.peak) + "<br>" + 
@@ -301,7 +305,7 @@
                             return tooltip.style("visibility", "hidden");
                         });
 
-                        // create second stack
+                        // create second stack of bars initially showing peak population
                         svg.selectAll( "rect.now" )
                             .data( popData )
                             .enter()
@@ -309,11 +313,11 @@
                             .attr( "x", function(d,i){
                             return (x_axisLength/arrayLength)*i + 30;  } )
                             .attr( "y", function(d) {
-                            return h - yScale(d.now_pop);  } )
+                            return h - yScale(d.peak);  } )
                             .attr( "width", (x_axisLength/arrayLength)-5 )
                             .attr( "height", function(d){
-                            return yScale(d.now_pop); })
-                            .attr( "fill", "orange") //"#D85F41")
+                            return yScale(d.peak); })
+                            .attr( "fill", "orange")
                             .on("mouseover", function(d){
                             return tooltip.style("visibility", "visible").html(d.city + "<br>" + "Peak population: " +d3.format(",")(d.peak) + "<br>" + "2010 Population: " + +d3.format(",")(d.now_pop));
                         })
@@ -322,7 +326,13 @@
                         })
                             .on("mouseout", function(d){
                             return tooltip.style("visibility", "hidden");
-                        });
+                        })
+                            .transition()
+                            .duration(5000)
+                            .attr( "x", function(d,i){ return (x_axisLength/arrayLength)*i + 30;  } )
+                            .attr( "y", function(d) { return h - yScale(d.now_pop);  } )
+                            .attr( "width", (x_axisLength/arrayLength)-5 )
+                            .attr( "height", function(d){ return yScale(d.now_pop); });
 
                         // Add axes
                         svg.append("line")
@@ -352,8 +362,9 @@
                         .style("border", "0px")
                         .style("z-index", "10")
                         .style("visibility", "hidden");
+
                     };
-                </script>
+                </script>        
             </div>
         </div>      
     </section>
