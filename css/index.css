@@ -92,11 +92,11 @@ header {
 }
 
 #secondsection { 
-    background-color: #A5978B;
+    background-color: #ffffff;
 }
 
 #thirdsection {
-	background-color: #5A2A27;
+	background-color: #ffffff;
   height: 150vh;
 }
 
@@ -105,7 +105,7 @@ header {
 }
 
 #portfolio {
-  background-color: #5C4742;
+  background-color: #ffffff;
 }
 
 #case_study {
@@ -613,24 +613,8 @@ figcaption {
     color: white;
 }
 
-#sec_property_type {
-        /*background-color:#778899;*/
-    background-color:#000;
-    padding: 5px;
-}
-
-#sec_causes {
-    background-color:#000;
-    text-align: center;
-    padding: 5px;
-}
-
-#nav_img {
-
-}
-
 text {
-    font-family: "Open Sans", sans-serif;
+    font-family: 'Merriweather', 'Helvetica Neue', Arial, sans-serif;
     font-size: 12px;
     fill: white;
 }
