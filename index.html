@@ -349,9 +349,7 @@
                             .attr("text-anchor", "end")
                             .text("Population")
                             .attr("transform", "translate(15, 150) rotate(-90)");
-                        
-                        console.log((x_axisLength/arrayLength)*(0) + (30));
-                        
+                                        
                         // add city names on x-axis
                         svg.selectAll( "rect.now" )
                             .data( popData )
@@ -362,7 +360,7 @@
                             .style("font-family", "sans-serif")
                             .style("font-size", "11px")
                             .text(function(d){ return d.city; })
-                            .attr("transform", function(d,i) {return ("translate(" + ((x_axisLength/arrayLength)*i +35) + ", 270) rotate(-90)"); });
+                            .attr("transform", function(d,i) {return ("translate(" + ((x_axisLength/arrayLength)*i +37) + ", 270) rotate(-90)"); });
                         
                         var tooltip = d3.select("body")
                             .append("div")
