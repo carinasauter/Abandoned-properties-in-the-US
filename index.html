@@ -320,14 +320,10 @@
                             return yScale(d.peak); })
                             .attr( "fill", "#8B786D")
                             .on("mouseover", function(d){
-                            return tooltip.style("visibility", "visible").html(d.city + "<br>" + "Peak population: " +d3.format(",")(d.peak) + "<br>" + "2010 Population: " + +d3.format(",")(d.now_pop));
-                        })
+                            return tooltip.style("visibility", "visible").html(d.city + "<br>" + "Peak population: " +d3.format(",")(d.peak) + "<br>" + "2010 Population: " + +d3.format(",")(d.now_pop)); })
                             .on("mousemove", function(d){
-                            return tooltip.style("top", (event.pageY-45)+"px").style("left",(event.pageX+5)+"px").html(d.city + "<br>" + "Peak population: " + d3.format(",")(d.peak) + "<br>" + "2010 Population: " + d3.format(",")(d.now_pop));
-                        })
-                            .on("mouseout", function(d){
-                            return tooltip.style("visibility", "hidden");
-                        })
+                            return tooltip.style("top", (event.pageY-45)+"px").style("left",(event.pageX+5)+"px").html(d.city + "<br>" + "Peak population: " + d3.format(",")(d.peak) + "<br>" + "2010 Population: " + d3.format(",")(d.now_pop)); })
+                            .on("mouseout", function(d){ return tooltip.style("visibility", "hidden"); })
                             .transition()
                             .duration(5000)
                             .attr( "x", function(d,i){ return (x_axisLength/arrayLength)*i + 30;  } )
@@ -350,6 +346,17 @@
                             .text("Size of Population")
                             .attr("transform", "translate(15, 150) rotate(-90)")
                             .style("fill",'black');
+                        
+                        // add year text
+                        svg.append("text")
+                            .attr("class", "year label")
+                            .attr("text-anchor", "middle")
+                            .text("Year: 1950")
+                            .attr("transform", "translate(75, 50)")
+                            .style("fill",'black')
+                            .transition() // Year transition not working yet
+                            .duration(5000)
+                            .attr("text", "Year: 2010");
                         
                         // add city names on x-axis
                         svg.selectAll( "rect.now" )
