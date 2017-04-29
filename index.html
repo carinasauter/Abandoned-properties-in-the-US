@@ -231,13 +231,13 @@
             <i>Property abandonment is a symptom of underlying disease</i>
         </h2>
         <div id="sec_causes">
-            <div style="display: inline-block; width: 25%; height: 300px; line-height: 300px; vertical-align: middle;">
+            <div style="display: inline-block; width: 25%; height: 300px; line-height: 350px; vertical-align: middle;">
                 <span style="display: inline-block; vertical-align: middle; line-height: normal; padding: 15px;">
                 <font color="#fff" face="verdana">Gradual reduction in populace leaves homes and other properties vacant. The cities shown on the left are ones that have lost at least 20% of their population since 1950. Detroit, MI presents a glaring example with its population having declined by 62% since 1950 after its automobile industry suffered global competition.
                 </font>
                 </span>
             </div>
-            <div id="shrinking_pop" style="display: inline-block; height: 300px; vertical-align: middle;">  
+            <div id="shrinking_pop" style="display: inline-block; height: 350px; vertical-align: middle;">  
                 <script>
                     // The stacked bar chart is adapted from Mike Foster's workshop http://duspviz.mit.edu/d3-workshop/intro-to-d3/
 
@@ -260,13 +260,14 @@
                     function createVisualization(){
                         // Width and height of SVG
                         var w = 650;
-                        var h = 300;
+                        var h = 350;
+                        var y_offset = 90;
 
                         // Get length of dataset
                         var arrayLength = popData.length; // length of dataset
                         var maxValue = d3.max(popData, function(d) { return +d.peak;} ); // get max value of our dataset
                         var x_axisLength = w-50; // length of x-axis in our layout
-                        var y_axisLength = h-50; // length of y-axis in our layout
+                        var y_axisLength = h-100; // length of y-axis in our layout
 
                         // Create y scales
                         var yScale = d3.scaleLinear()
@@ -287,7 +288,7 @@
                             .attr( "x", function(d,i){
                             return (x_axisLength/arrayLength)*i + 30;  } )
                             .attr( "y", function(d) {
-                            return h - yScale(d.peak);  } )
+                            return h - y_offset - yScale(d.peak);  } )
                             .attr( "width", (x_axisLength/arrayLength)-5 )
                             .attr( "height", function(d){
                             return yScale(d.peak); })
@@ -313,7 +314,7 @@
                             .attr( "x", function(d,i){
                             return (x_axisLength/arrayLength)*i + 30;  } )
                             .attr( "y", function(d) {
-                            return h - yScale(d.peak);  } )
+                            return h - y_offset - yScale(d.peak);  } )
                             .attr( "width", (x_axisLength/arrayLength)-5 )
                             .attr( "height", function(d){
                             return yScale(d.peak); })
@@ -330,7 +331,7 @@
                             .transition()
                             .duration(5000)
                             .attr( "x", function(d,i){ return (x_axisLength/arrayLength)*i + 30;  } )
-                            .attr( "y", function(d) { return h - yScale(d.now_pop);  } )
+                            .attr( "y", function(d) { return h - y_offset - yScale(d.now_pop);  } )
                             .attr( "width", (x_axisLength/arrayLength)-5 )
                             .attr( "height", function(d){ return yScale(d.now_pop); });
 
@@ -338,8 +339,8 @@
                         svg.append("line")
                             .attr("x1", 25)
                             .attr("x2", 30 + x_axisLength)
-                            .attr("y1", h)
-                            .attr("y2", h)
+                            .attr("y1", h - y_offset)
+                            .attr("y2", h - y_offset)
                             .attr("stroke-width", 2)
                             .attr("stroke", "white");
 
@@ -348,21 +349,34 @@
                             .attr("text-anchor", "end")
                             .text("Population")
                             .attr("transform", "translate(15, 150) rotate(-90)");
-
+                        
+                        console.log((x_axisLength/arrayLength)*(0) + (30));
+                        
+                        // add city names on x-axis
+                        svg.selectAll( "rect.now" )
+                            .data( popData )
+                            .enter()
+                            .append("text")
+                            .attr("class", "x label")
+                            .attr("text-anchor", "end")
+                            .style("font-family", "sans-serif")
+                            .style("font-size", "11px")
+                            .text(function(d){ return d.city; })
+                            .attr("transform", function(d,i) {return ("translate(" + ((x_axisLength/arrayLength)*i +35) + ", 270) rotate(-90)"); });
+                        
                         var tooltip = d3.select("body")
-                        .append("div")
-                        .style("position", "absolute")
-                        .style("font-family", "'Open Sans', sans-serif")
-                        .style("font-size", "12px")
-                        .style("color", "black")
-                        .style("background", "white")
-                        .style("padding", "4px")
-                        .style("border-radius", "6px")
-                        .style("opacity", 0.8)
-                        .style("border", "0px")
-                        .style("z-index", "10")
-                        .style("visibility", "hidden");
-
+                            .append("div")
+                            .style("position", "absolute")
+                            .style("font-family", "'Open Sans', sans-serif")
+                            .style("font-size", "12px")
+                            .style("color", "black")
+                            .style("background", "white")
+                            .style("padding", "4px")
+                            .style("border-radius", "6px")
+                            .style("opacity", 0.8)
+                            .style("border", "0px")
+                            .style("z-index", "10")
+                            .style("visibility", "hidden");
                     };
                 </script>        
             </div>
