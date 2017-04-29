@@ -229,17 +229,16 @@
     </section>
 
     <section id="secondsection">
-        <h2>
-            <i>Property abandonment is a symptom of underlying disease</i>
-        </h2>
-        <div id="sec_causes">
-            <div style="display: inline-block; width: 25%; height: 300px; line-height: 350px; vertical-align: middle;">
-                <span style="display: inline-block; vertical-align: middle; line-height: normal; padding: 15px;">
-                <font color="#000" face="verdana">A gradual reduction in population leaves homes and other properties vacant. The cities on the left are the ones that have lost at least 20% of their population since 1950. Detroit presents a glaring example - its population has declined by 62% since 1950 after the city's lifeblood, the automobile industry, suffered global competition.
-                </font>
-                </span>
+        <h3 style="height: 20vh;">
+            Property abandonment is a symptom of underlying disease
+        </h3>
+        <div class="parent">
+            <div class="pic1" >
+            <p>A gradual reduction in population leaves homes and other properties vacant. The cities on the left are the ones that have lost at least 20% of their population since 1950. Detroit presents a glaring example - its population has declined by 62% since 1950 after the city's lifeblood, the automobile industry, could not profitably compete globally anymore.
+            </p>
             </div>
-            <div id="shrinking_pop" style="display: inline-block; height: 350px; vertical-align: middle;">  
+            <div class="or"></div>
+            <div class= 'pic2' id="shrinking_pop">  
                 <script>
                     // The stacked bar chart is adapted from Mike Foster's workshop http://duspviz.mit.edu/d3-workshop/intro-to-d3/
 
@@ -294,12 +293,11 @@
                             .attr( "width", (x_axisLength/arrayLength)-5 )
                             .attr( "height", function(d){
                             return yScale(d.peak); })
-                            .attr( "fill", "#000")
-                            .attr("stroke", "orange")
+                            .attr( "fill", "#BFA89E")
+                            .attr("stroke", "#8B786D")
                             .attr("stroke-width", "1px")
                             .on("mouseover", function(d){
-                            return tooltip.style("visibility", "visible").html(d.city + "<br>" + "Peak population: " +d3.format(",")(d.peak) + "<br>" + 
-                                                                               "2010 Population: " + +d3.format(",")(d.now_pop));
+                            return tooltip.style("visibility", "visible").html(d.city + "<br>" + "Peak population: " +d3.format(",")(d.peak) + "<br>" + "2010 Population: " + +d3.format(",")(d.now_pop));
                         })
                             .on("mousemove", function(d){
                             return tooltip.style("top", (event.pageY-45)+"px").style("left",(event.pageX+5)+"px").html(d.city + "<br>" + "Peak population: " + d3.format(",")(d.peak) + "<br>" + "2010 Population: " + d3.format(",")(d.now_pop));
@@ -320,7 +318,7 @@
                             .attr( "width", (x_axisLength/arrayLength)-5 )
                             .attr( "height", function(d){
                             return yScale(d.peak); })
-                            .attr( "fill", "orange")
+                            .attr( "fill", "#8B786D")
                             .on("mouseover", function(d){
                             return tooltip.style("visibility", "visible").html(d.city + "<br>" + "Peak population: " +d3.format(",")(d.peak) + "<br>" + "2010 Population: " + +d3.format(",")(d.now_pop));
                         })
@@ -348,9 +346,10 @@
 
                         svg.append("text")
                             .attr("class", "y label")
-                            .attr("text-anchor", "end")
-                            .text("Population")
-                            .attr("transform", "translate(15, 150) rotate(-90)");
+                            .attr("text-anchor", "middle")
+                            .text("Size of Population")
+                            .attr("transform", "translate(15, 150) rotate(-90)")
+                            .style("fill",'black');
                         
                         console.log((x_axisLength/arrayLength)*(0) + (30));
                         
@@ -361,15 +360,16 @@
                             .append("text")
                             .attr("class", "x label")
                             .attr("text-anchor", "end")
-                            .style("font-family", "sans-serif")
-                            .style("font-size", "11px")
+                            .style("font-family", 'Helvetica Neue')
+                            .style("font-size", "10px")
+                            .style('fill','#000000')
                             .text(function(d){ return d.city; })
-                            .attr("transform", function(d,i) {return ("translate(" + ((x_axisLength/arrayLength)*i +35) + ", 270) rotate(-90)"); });
+                            .attr("transform", function(d,i) {return ("translate(" + ((x_axisLength/arrayLength)*i +35) + ", 270) rotate(-60)"); });
                         
                         var tooltip = d3.select("body")
                             .append("div")
                             .style("position", "absolute")
-                            .style("font-family", "'Open Sans', sans-serif")
+                            .style("font-family", "Helvetica Neue")
                             .style("font-size", "12px")
                             .style("color", "black")
                             .style("background", "white")
