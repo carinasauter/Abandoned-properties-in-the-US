@@ -656,11 +656,10 @@ text {
     display: table-row;
     margin: 0 auto;
     min-width: 400px;
-	height: 400px;
 }
 
 #tableau {
-    margin-top: 420px;
+    margin-top: 650px;
 }
 
 #spacer {
