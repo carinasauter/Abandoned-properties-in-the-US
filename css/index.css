@@ -381,7 +381,7 @@ header .header-content .header-content-inner p {
   color: white;
   opacity: 0;
   display: block;
-  background: #C4BBAF;
+  background: #B3B6B7; /*tile background */
   position: absolute;
   bottom: 0;
   text-align: center;
