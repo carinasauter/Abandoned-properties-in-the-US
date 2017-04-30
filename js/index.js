@@ -1,10 +1,10 @@
 var svgContainer = d3.select("#viz").append("svg")
-    .attr("width", 500)
-    .attr("height", 500);
+    .attr("width", 600)
+    .attr("height", 600);
 
 
-var canvasWidth = 500
-var canvasHeight = 500
+var canvasWidth = 600
+var canvasHeight = 600
 var svg = d3.select('svg');
 
 // Gabe's code
