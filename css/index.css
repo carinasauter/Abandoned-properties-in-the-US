@@ -96,8 +96,8 @@ header {
 }
 
 #thirdsection {
-	background-color: #ffffff;
-  height: 150vh;
+    background-color: #ffffff;
+/*    height: 150vh;*/
 }
 
 #finalsection {
@@ -178,7 +178,7 @@ header {
   text-transform: uppercase;
   font-size: 40px;
   text-align: center;
-  line-height: 40vh;
+/*  line-height: 40vh;*/
   /*background-image: url('../img/chicago1.jpg');*/
   /*background-attachment: fixed;*/
   /*background-repeat: no-repeat;*/
@@ -621,7 +621,6 @@ text {
 
 #pop_describe {
     width: 40%;
-/*    float: left;*/
     padding: 25px;
     display: table-cell;
     vertical-align: middle;
@@ -630,11 +629,45 @@ text {
 
 #pop_bars {
     width: 60%;
-/*    float: left;*/
     display: table-cell;
     vertical-align: middle;
 }
 
 #pop {
     display: table;
+}
+
+#economic {
+    display: table;
+    margin-top: 30px;
+}
+
+#economic_describe {
+    width: 40%;
+    padding: 10px;
+    display: table-cell;
+    vertical-align: middle;
+    font-family: "open sans";
+}
+
+#economic_line {
+    width: 60%;
+    display: table-cell;
+    vertical-align: middle;
+}
+
+#tableau {
+    margin-top: 330px;
+}
+
+#spacer {
+    display: block;
+    margin: 1px;
+}
+
+.spacer {
+    display: block;
+    float: left;
+    margin: auto;
+    width: 100%;
 }
