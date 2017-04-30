@@ -229,12 +229,12 @@
     </section>
 
     <section id="secondsection">
-        <h2 style="text-align: center; color: black; height: 8vh;">
+        <h2 style="text-align: center; color: black; height: 10vh;">
             <i>Property abandonment is a symptom of underlying disease</i>
         </h2>
         <div id="pop">
             <div id="pop_describe">
-                <p>A gradual reduction in city population can cause higher vacancy rate of homes and other property types within that city. The cities on the left are the ones that have lost at least 20% of their population since 1950. Detroit presents a glaring example - its population has declined by 62% since 1950 after the city's lifeblood, the automobile industry, could not profitably compete globally anymore.
+                <p style="font-size: 1.3em;">A gradual reduction in city population can cause higher vacancy rate of homes and other property types within that city. The cities on the left are the ones that have lost at least 20% of their population since 1950. Detroit presents a glaring example - its population has declined by 62% since 1950 after the city's lifeblood, the automobile industry, could not profitably compete globally anymore.
                 </p>
             </div>
             <div id="pop_bars">  
@@ -259,7 +259,7 @@
 
                     function createVisualization(){
                         // Width and height of SVG
-                        var w = 900;
+                        var w = 800;
                         var h = 350;
                         var y_offset = 90;
 
@@ -344,12 +344,17 @@
                             .attr("text-anchor", "middle")
                             .text("Size of Population")
                             .attr("transform", "translate(15, 150) rotate(-90)")
-                            .style("fill",'black');
+                            .style("font-family", "open sans")
+                            .style("font-size", "12px")
+                            .style('fill','#555');
                         
                         // add year text
                         svg.append("text")
                             .attr("class", "year label")
                             .attr("text-anchor", "middle")
+                            .style("font-family", "open sans")
+                            .style("font-size", "12px")
+                            .style('fill','#555')
                             .text("Year: 1950")
                             .attr("transform", "translate(75, 50)")
                             .style("fill",'black')
@@ -364,16 +369,16 @@
                             .append("text")
                             .attr("class", "x label")
                             .attr("text-anchor", "end")
-                            .style("font-family", 'Helvetica Neue')
-                            .style("font-size", "10px")
-                            .style('fill','#000000')
+                            .style("font-family", 'open sans')
+                            .style("font-size", "11px")
+                            .style('fill','#555')
                             .text(function(d){ return d.city; })
-                            .attr("transform", function(d,i) {return ("translate(" + ((x_axisLength/arrayLength)*i +37) + ", 270) rotate(-90)"); });
+                            .attr("transform", function(d,i) {return ("translate(" + ((x_axisLength/arrayLength)*i +40) + ", 270) rotate(-90)"); });
                         
                         var tooltip = d3.select("body")
                             .append("div")
                             .style("position", "absolute")
-                            .style("font-family", "Helvetica Neue")
+                            .style("font-family", "open sans")
                             .style("font-size", "12px")
                             .style("color", "black")
                             .style("background", "white")
@@ -387,22 +392,24 @@
                 </script>        
             </div>
         </div>
-        <div>
-            <div style="display: inline; float: left; text-align: left; padding: 10px;">
-                Economic crises can cripple cities affecting large scale foreclosures and declines in property values, making them less attractive to buyers. Detroit shows a glaring example of this phenomenon during the economic resession of 2008, when tax foreclosures increased significantly and home values dropped in addition to continuous flight of people. 
+        <div class="spacer"></div>
+        <div id="economic">
+            <div id="economic_line">
+                <img src="assets/foreclosures.png" width="700" height="auto">
+            </div> 
+            <div id="economic_describe">
+                <p style="font-size: 1.3em;">Economic crises can cripple cities affecting large scale foreclosures and declines in property values, making them less attractive to buyers. Detroit shows a glaring example of this phenomenon during the economic resession of 2008, when tax foreclosures increased significantly and home values dropped in addition to continuous flight of people.</p>
             </div>
-<!--             <div style="display: inline; float:right;">
-                <img src="assets/foreclosures.png" width="800" height="auto">
-            </div> -->
-
-        </div>      
+        </div>
     </section>
 	
 	<section class="features" id="thirdsection">
+        <div id="tableau">
 		<div>
-			<p class='container'>In addition to the underlying disease of abandoned properties, there are multiple characteristics about a city that have correlation with property vacancy rate. The graph below represents this relationship for 20 cities in the United States - 10 cities with the highest vacancy rates in <span style="color:red"><b> red </b></span> and 10 cities with the lowest vacancy rates in <span style="color:green"><b>green </b></span>. Click on the buttons below to look at this relationship. </p></div>
+			<p class='container' style="font-family: 'open sans'; font-size: 1.3em;">In addition to the underlying disease of abandoned properties, there are multiple characteristics about a city that have correlation with property vacancy rate. The graph below represents this relationship for 20 cities in the United States - 10 cities with the highest vacancy rates in <span style="color:red"><b> red </b></span> and 10 cities with the lowest vacancy rates in <span style="color:green"><b>green </b></span>. Click on the buttons below to look at this relationship. </p></div>
 
-        <div align='center' class='tableauPlaceholder' id='viz1493535926861' style='position: relative'><noscript><a href='#'><img alt='Vacancy Rate Compared with Other City Characteristics ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Ab&#47;AbandonedEffects&#47;Story1_1&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='site_root' value='' /><param name='name' value='AbandonedEffects&#47;Story1_1' /><param name='tabs' value='no' /><param name='toolbar' value='no' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Ab&#47;AbandonedEffects&#47;Story1_1&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1493535926861');                    var vizElement = divElement.getElementsByTagName('object')[0];                    vizElement.style.width='804px';vizElement.style.height='869px';                    var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script> 
+        <div align='center' class='tableauPlaceholder' id='viz1493535926861' style='position: relative;'><noscript><a href='#'><img alt='Vacancy Rate Compared with Other City Characteristics ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Ab&#47;AbandonedEffects&#47;Story1_1&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='site_root' value='' /><param name='name' value='AbandonedEffects&#47;Story1_1' /><param name='tabs' value='no' /><param name='toolbar' value='no' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Ab&#47;AbandonedEffects&#47;Story1_1&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1493535926861');                    var vizElement = divElement.getElementsByTagName('object')[0];                    vizElement.style.width='804px';vizElement.style.height='869px';                    var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script> 
+        </div>
     </section>
 
     <section id='case_study'>
