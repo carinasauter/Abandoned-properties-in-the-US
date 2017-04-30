@@ -736,7 +736,6 @@ text {
   -webkit-flex: 1;
   flex: 2;
   /*background-color: green;*/
-  width: 600px;
 }
 
 .viz_graph {
