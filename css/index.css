@@ -77,7 +77,7 @@ header {
   background-size: cover;
   -o-background-size: cover;
   background-position: center;
-  background-image: url('../img/header.jpg');
+  background-image: url('../img/bath.jpeg');
   text-align: center;
   color: white;
 }
@@ -381,7 +381,7 @@ header .header-content .header-content-inner p {
   color: white;
   opacity: 0;
   display: block;
-  background: #C4BBAF;
+  background: #B3B6B7; /*tile background */
   position: absolute;
   bottom: 0;
   text-align: center;
@@ -672,4 +672,75 @@ text {
     float: left;
     margin: auto;
     width: 100%;
+}
+
+  .arrow{
+    stroke-width:5;
+    stroke:#000;
+    stroke-dasharray:5, 5;
+  }
+
+  circle{
+    stroke-width:5;
+    stroke:blue;
+    fill:blue;
+  }
+
+  #turtle-icon, #arrow{
+    stroke-width:1;
+    stroke-dasharray:0; 
+  }
+
+  .flowline {
+    fill: none;
+    stroke: black;
+    opacity: 1;
+    stroke-width: 4;
+    stroke-dasharray: 10, 4;
+    animation: flow 1s linear infinite;
+    -webkit-animation: flow 1s linear infinite;
+  }
+
+  @keyframes flow {
+    from {
+      stroke-dashoffset: 14;
+    }
+
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  @-webkit-keyframes flow {
+    from {
+      stroke-dashoffset: 14;
+    }
+
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+
+.parent_viz {
+  display: -webkit-flex;
+  display: flex;
+  height: 100vh;
+  margin-top:2%;
+  align-items: center;
+  flex-wrap: wrap;
+
+}
+
+.viz_text{
+  -webkit-flex: 1;
+  flex: 2;
+  /*background-color: green;*/
+  width: 600px;
+}
+
+.viz_graph {
+  -webkit-flex: 1;
+  flex: 1;
+  /*background-color: blue;*/
 }

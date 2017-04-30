@@ -20,7 +20,8 @@
     <script src="js/creative.min.js"></script>
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
-
+    <script src="https://d3js.org/d3-selection-multi.v0.4.min.js"></script>
+    
     <title>Infoviz Final Project - Team 3</title>
     
 
@@ -137,7 +138,7 @@
             <div class="row no-gutter popup-gallery">
                 <div class="col-lg-4 col-sm-6">
                     <div class="portfolio-box">
-                        <img src="img/foreclosure.png" class="img-responsive" alt="">
+                        <img src="img/foreclosure_black.png" class="img-responsive" alt="">
                         <div class="portfolio-box-caption">
                             <div class="portfolio-box-caption-content">
                                 <div class="project-category text-faded">
@@ -152,7 +153,7 @@
                 </div>
                 <div class="col-lg-4 col-sm-6">
                     <div class="portfolio-box">
-                        <img src="img/tank.png" class="img-responsive" alt="">
+                        <img src="img/tank_black.png" class="img-responsive" alt="">
                         <div class="portfolio-box-caption">
                             <div class="portfolio-box-caption-content">
                                 <div class="project-category text-faded">
@@ -167,7 +168,7 @@
                 </div>
                 <div class="col-lg-4 col-sm-6">
                     <div class="portfolio-box">
-                        <img src="img/factory.png" class="img-responsive" alt="">
+                        <img src="img/factory_black.png" class="img-responsive" alt="">
                         <div class="portfolio-box-caption">
                             <div class="portfolio-box-caption-content">
                                 <div class="project-category text-faded">
@@ -182,7 +183,7 @@
                 </div>
                 <div class="col-lg-4 col-sm-6">
                     <div class="portfolio-box">
-                        <img src="img/train.png" class="img-responsive" alt="">
+                        <img src="img/train_black.png" class="img-responsive" alt="">
                         <div class="portfolio-box-caption">
                             <div class="portfolio-box-caption-content">
                                 <div class="project-category text-faded">
@@ -197,7 +198,7 @@
                 </div>
                 <div class="col-lg-4 col-sm-6">
                     <div class="portfolio-box">
-                        <img src="img/wheel.png" class="img-responsive" alt="">
+                        <img src="img/wheel_black.png" class="img-responsive" alt="">
                         <div class="portfolio-box-caption">
                             <div class="portfolio-box-caption-content">
                                 <div class="project-category text-faded">
@@ -212,7 +213,7 @@
                 </div>
                 <div class="col-lg-4 col-sm-6">
                     <div class="portfolio-box">
-                        <img src="img/city.png" class="img-responsive" alt="">
+                        <img src="img/city_black.png" class="img-responsive" alt="">
                         <div class="portfolio-box-caption">
                             <div class="portfolio-box-caption-content">
                                 <div class="project-category text-faded">
@@ -229,9 +230,31 @@
         </div>
     </section>
 
+    <div class="parent_viz">
+    <div class="viz_text">
+        <h1><i>The Vicious Cycle of Abandoned Property</i></h1>
+        <p>Property becomes abandoned for a variety of reasons - most often due to a change in the economy that lead to a lack of funds to maintain it. The underlying reasons also don't tend to just impact a single home owner but entire neighborhoods and cities. Abandoned properties pose a serious problem for communities. 
+        </p>
+        <p><i>But why exactly are abandoned properties a problem?</i></p>
+        <ul>
+            <li><b>Crime: </b> Vacant properties often become a breeding ground for crime, tying up an inordinate amount of police resources.</li> <br>
+            <li><b>Arson and Accidental Fires: </b>The US Fire Administration reports that over 12,000 fires in vacant structures are reported each year in the US, resulting in $73 million in property damage annually. </li> <br>
+            <li><b>Public Nuisances and Health: </b> The local governments must clean and care for abandoned property to prevent a buildup of trash, illegal dumping, and rodent infestations. In some cases, abandoned properties contain toxic waste, particularly in the case of abandoned industrial buildings.
+            </li> <br>
+            <li>
+                <b>Lost Tax Revenue: </b> Vacant properties reduce city tax revenues in three ways: <ul><li> they are often tax delinquent </li> <li>their low value means they generate little in taxes </li><li>and they depress property values across an entire neighborhood.</li> </ul><br> Lower property values mean lower tax revenues for local governments.
+            </li><br>
+            <li><b>Lower Property Values: </b>Vacant properties generate little in taxes – but, perhaps more importantly, they rob surrounding homes and businesses of their value. Explore the map here to understand what that means.</li>
+        </ul>
+        <p><i>Hover over the points on the vicious cycle on the right to explore a common narrative that leads to properties being abondoned.</i></p>
+    </div>
+    <div class='viz_graph' id='viz'></div>
+    </div>
+
+
     <section id="secondsection">
         <h2 style="text-align: center; color: black; height: 10vh;">
-            <i>Property abandonment is a symptom of underlying disease</i>
+            <i>Property abandonment is just a symptom of underlying disease</i>
         </h2>
         <h4 style="text-align: center; color: black; width: 60vw; margin: auto; height: 15vh; line-height: 24px;">
             Declining population, economic crises and rising poverty are among the key non-natural factors that are associated with this phenomenon. Explore these relationships below.
@@ -532,7 +555,7 @@
             </div> 
 
         </div>
-    </section><br><br>
+    </section><br><br><br><br><br>
 	
 	<!-- <section class="features" id="thirdsection"> -->
         <div id="tableau">
@@ -551,20 +574,20 @@
 
     </div>
     <div>
-
-        <p class='container'>Many major cities in the United States have experienced increase in vacancy rates and they continue to struggle to devise effective programs and policies to mitigate the dangers of abandoned properties. Among these cities, Chicago has gone through a series of transformations in trying to form responses to these properties since the late 1940 to even now. Let's take a look.</p> 
         <br><br>
+        <p class='container'>Many major cities in the United States have experienced increase in vacancy rates and they continue to struggle to devise effective programs and policies to mitigate the dangers of abandoned properties. Among these cities, Chicago has gone through a series of transformations in trying to form responses to these properties since the late 1940 to even now. Let's take a look.</p> 
+        <br><br></div>
+        </section>
+    <div>
         <p><img id='Timeline' class="center-block" style="max-width:90%;" src="img/Timeline3.jpg" alt="Chicago Timeline"></p>
     </div>
-        
-    </section>
-<section></section>
-<section><h3 align='center'><b>A little bit about Chicago...</b></h3>
+        <br><br>
+<section><h3 align='center'><b>A little bit more about Chicago...</b></h3>
 <div class="container">
   <div class="row">
     <div class="col-sm-4">
       <h3 align='center'>3rd Biggest City</h3>
-      <img id='City' class="center-block" style="max-width:100%;" src="img/City.png" alt="Chicago City">
+      <img id='City' class="center-block" style="max-width:100%;" src="img/ChicagoCity.png" alt="Chicago City">
     </div>
     <div class="col-sm-4">
       <h3 align='center'>Increase in Crime</h3>
@@ -579,10 +602,10 @@
 <div class="container">
   <div class="row">
     <div class="col-sm-4">
-      <p>Chicago is the 3rd biggest city in the US by population, after New York City, NY and Los Angeles, CA.</p>
+      <p>Chicago is the 3rd biggest city in the US by population, after New York City and Los Angeles.</p>
     </div>
     <div class="col-sm-4">
-      <p>In the recent years, there has been an increase in different type of criminal activities in Chicago such as homicide, shooting, and robbery. </p>
+      <p>In recent years, there has been an increase in different type of criminal activities in Chicago such as homicides, shootings, and robberies. </p>
     </div>
     <div class="col-sm-4">      
       <p>From 2010 to 2015, Chicago's population grew by 1%.</p>
@@ -591,15 +614,10 @@
 </div> <br><br>
     <div>
         <h3 align='center'>Number of violations related to vacant properties in Chicago by year</h3> 
-        <p><img id='Violations' class="center-block" style="max-width:60%;" src="img/capture.jpg" alt="Chicago violations increasing"></section></p>
-    </div>
-<!--     <section>
-        <div>
-    
-            <img id='Timeline' class="center-block" style="max-width:90%;" src="img/Timeline2.jpg" alt="Chicago Timeline">
-        </div>
-    </section>
-     -->
+        <div><img id='Violations' class="center-block" style="max-width:60%;" src="img/capture.jpg" alt="Chicago violations increasing"></div><br>
+        <div align='center' class='container'><p> transition </p>
+    </div></section>
+    <br><br><br><br><br><br>
     <section id="finalsection">
     <div>
     <h3>311 Calls for abandoned homes in Chicago</h3>
@@ -661,3 +679,5 @@
     </section>
 
 </body>
+
+<script src="js/index.js" type="text/javascript"></script>
