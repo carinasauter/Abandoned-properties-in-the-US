@@ -21,7 +21,7 @@ map.addControl(new mapboxgl.NavigationControl());
 
 // function to call once the map has loaded
 map.on('load', function() {
-    console.log('map loaded!');
+    // console.log('map loaded!');
 
     // we'll use d3.json to load the point data asynchronously
     d3.json('data/abandoned_chicago.geojson', function(error, data) {
