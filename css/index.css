@@ -639,7 +639,9 @@ text {
 
 #economic {
     display: table;
-    margin-top: 30px;
+    margin-top: 40px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 #economic_describe {
@@ -648,16 +650,18 @@ text {
     display: table-cell;
     vertical-align: middle;
     font-family: "open sans";
+    margin: auto;
 }
 
 #economic_line {
     width: 60%;
     display: table-cell;
     vertical-align: middle;
+    margin: auto;
 }
 
 #tableau {
-    margin-top: 330px;
+    margin-top: 350px;
 }
 
 #spacer {
