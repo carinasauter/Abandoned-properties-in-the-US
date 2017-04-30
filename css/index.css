@@ -675,3 +675,74 @@ text {
     margin: auto;
     width: 100%;
 }
+
+  .arrow{
+    stroke-width:5;
+    stroke:#000;
+    stroke-dasharray:5, 5;
+  }
+
+  circle{
+    stroke-width:5;
+    stroke:blue;
+    fill:blue;
+  }
+
+  #turtle-icon, #arrow{
+    stroke-width:1;
+    stroke-dasharray:0; 
+  }
+
+  .flowline {
+    fill: none;
+    stroke: black;
+    opacity: 1;
+    stroke-width: 4;
+    stroke-dasharray: 10, 4;
+    animation: flow 1s linear infinite;
+    -webkit-animation: flow 1s linear infinite;
+  }
+
+  @keyframes flow {
+    from {
+      stroke-dashoffset: 14;
+    }
+
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  @-webkit-keyframes flow {
+    from {
+      stroke-dashoffset: 14;
+    }
+
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+
+.parent {
+  display: -webkit-flex;
+  display: flex;
+  height: 100vh;
+  margin-top:2%;
+  justify-content: space-around;
+  /*align-items: center;*/
+  flex-wrap: wrap;
+}
+
+.viz_text{
+  -webkit-flex: 1;
+  flex: 2;
+  /*background-color: green;*/
+  width: 800px;
+}
+
+.viz_graph {
+  -webkit-flex: 1;
+  flex: 1;
+  /*background-color: blue;*/
+}

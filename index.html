@@ -18,6 +18,8 @@
     <script src="vendor/scrollreveal/scrollreveal.min.js"></script>
     <script src="vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
     <script src="js/creative.min.js"></script>
+    <script src="https://d3js.org/d3-selection-multi.v0.4.min.js"></script>
+    
 
 
     <title>Infoviz Final Project - Team 3</title>
@@ -227,6 +229,28 @@
             </div>
         </div>
     </section>
+
+    <div class="parent">
+    <div class="viz_text">
+        <h1><i>The Vicious Cycle of Abandoned Property</i></h1>
+        <p>Property becomes abandoned for a variety of reasons - most often due to a change in the economy that lead to a lack of funds to maintain it. The underlying reasons also don't tend to just impact a single home owner but entire neighborhoods and cities. Abandoned properties pose a serious problem for communities. 
+        </p>
+        <p><i>But why exactly are abandoned properties a problem?</i></p>
+        <ul>
+            <li><b>Crime: </b> Vacant properties often become a breeding ground for crime, tying up an inordinate amount of police resources.</li> <br>
+            <li><b>Arson and Accidental Fires: </b>The US Fire Administration reports that over 12,000 fires in vacant structures are reported each year in the US, resulting in $73 million in property damage annually. </li> <br>
+            <li><b>Public Nuisances and Health: </b> The local governments must clean and care for abandoned property to prevent a buildup of trash, illegal dumping, and rodent infestations. In some cases, abandoned properties contain toxic waste, particularly in the case of abandoned industrial buildings.
+            </li> <br>
+            <li>
+                <b>Lost Tax Revenue: </b> Vacant properties reduce city tax revenues in three ways: <ul><li> they are often tax delinquent </li> <li>their low value means they generate little in taxes </li><li>and they depress property values across an entire neighborhood.</li> </ul><br> Lower property values mean lower tax revenues for local governments.
+            </li><br>
+            <li><b>Lower Property Values: </b>Vacant properties generate little in taxes – but, perhaps more importantly, they rob surrounding homes and businesses of their value. Explore the map here to understand what that means.</li>
+        </ul>
+        <p><i>Hover over the points on the vicious cycle on the right to explore a common narrative that leads to properties being abondoned.</i></p>
+    </div>
+    <div class='viz_graph' id='viz'></div>
+    </div>
+
 
     <section id="secondsection">
         <h2 style="text-align: center; color: black; height: 10vh;">
@@ -529,3 +553,5 @@
     </section>
 
 </body>
+
+<script src="js/index.js" type="text/javascript"></script>
