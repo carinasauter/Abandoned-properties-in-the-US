@@ -77,7 +77,7 @@ header {
   background-size: cover;
   -o-background-size: cover;
   background-position: center;
-  background-image: url('../img/header.jpg');
+  background-image: url('../img/abandoned.jpg');
   text-align: center;
   color: white;
 }
@@ -230,7 +230,7 @@ aside {
   transition: all 0.35s;
 }
 .navbar-default .navbar-header .navbar-brand {
-  color: #F05F40;
+  color: #F05F40; /*some kind of orange*/
   font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
   font-weight: 700;
   text-transform: uppercase;
@@ -258,35 +258,36 @@ aside {
 }
 .navbar-default .nav > li.active > a,
 .navbar-default .nav > li.active > a:focus {
-  color: #F05F40 !important;
+  color: #F05F40 !important; /*orange*/
   background-color: transparent;
 }
 .navbar-default .nav > li.active > a:hover,
 .navbar-default .nav > li.active > a:focus:hover {
-  background-color: transparent;
+  background-color: blue;
 }
 @media (min-width: 768px) {
   .navbar-default {
-    background-color: transparent;
+    background-color: white;
+    opacity: 0.5;
     border-color: rgba(255, 255, 255, 0.3);
   }
   .navbar-default .navbar-header .navbar-brand {
-    color: rgba(255, 255, 255, 0.7);
+    color: black; /*rgba(255, 255, 255, 0.7)*/
   }
   .navbar-default .navbar-header .navbar-brand:hover,
   .navbar-default .navbar-header .navbar-brand:focus {
-    color: white;
+    color: black;
   }
   .navbar-default .nav > li > a,
   .navbar-default .nav > li > a:focus {
-    color: rgba(255, 255, 255, 0.7);
+    color: black ;/*rgba(255, 255, 255, 0.7)*/
   }
   .navbar-default .nav > li > a:hover,
   .navbar-default .nav > li > a:focus:hover {
-    color: white;
+    color: black;
   }
   .navbar-default.affix {
-    background-color: white;
+    background-color: black;
     border-color: rgba(34, 34, 34, 0.05);
   }
   .navbar-default.affix .navbar-header .navbar-brand {
@@ -381,7 +382,7 @@ header .header-content .header-content-inner p {
   color: white;
   opacity: 0;
   display: block;
-  background: #C4BBAF;
+  background: #B3B6B7; /*tile background */
   position: absolute;
   bottom: 0;
   text-align: center;
@@ -645,23 +646,21 @@ text {
 }
 
 #economic_describe {
-    width: 40%;
-    padding: 10px;
-    display: table-cell;
-    vertical-align: middle;
+    display: table-row;
+    text-align: center;
     font-family: "open sans";
-    margin: auto;
+    margin: 15px;
 }
 
 #economic_line {
-    width: 60%;
-    display: table-cell;
-    vertical-align: middle;
-    margin: auto;
+    display: table-row;
+    margin: 0 auto;
+    min-width: 400px;
+	height: 400px;
 }
 
 #tableau {
-    margin-top: 350px;
+    margin-top: 420px;
 }
 
 #spacer {
@@ -674,4 +673,86 @@ text {
     float: left;
     margin: auto;
     width: 100%;
+}
+
+  .arrow{
+    stroke-width:5;
+    stroke:#000;
+    stroke-dasharray:5, 5;
+  }
+
+  circle{
+    stroke-width:5;
+    stroke:blue;
+    fill:blue;
+  }
+
+  #turtle-icon, #arrow{
+    stroke-width:1;
+    stroke-dasharray:0; 
+  }
+
+  .flowline {
+    fill: none;
+    stroke: black;
+    opacity: 1;
+    stroke-width: 4;
+    stroke-dasharray: 10, 4;
+    animation: flow 1s linear infinite;
+    -webkit-animation: flow 1s linear infinite;
+  }
+
+  @keyframes flow {
+    from {
+      stroke-dashoffset: 14;
+    }
+
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  @-webkit-keyframes flow {
+    from {
+      stroke-dashoffset: 14;
+    }
+
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+
+.parent_viz {
+  display: -webkit-flex;
+  display: flex;
+  height: 100vh;
+  margin-top:2%;
+  align-items: center;
+  flex-wrap: wrap;
+
+}
+
+.viz_text{
+  -webkit-flex: 1;
+  flex: 2;
+  /*background-color: green;*/
+  width: 600px;
+}
+
+.viz_graph {
+  -webkit-flex: 1;
+  flex: 1;
+  /*background-color: blue;*/
+}
+
+#homeHeading {
+  background-color: white;
+  opacity: 0.5;
+  color: black;
+  text-align: center;
+  margin-left: 100px;
+  margin-right: 100px;
+  margin-top: 100px;
+  border-radius: 10px;
 }
