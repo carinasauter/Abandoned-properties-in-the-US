@@ -645,23 +645,21 @@ text {
 }
 
 #economic_describe {
-    width: 40%;
-    padding: 10px;
-    display: table-cell;
-    vertical-align: middle;
+    display: table-row;
+    text-align: center;
     font-family: "open sans";
-    margin: auto;
+    margin: 15px;
 }
 
 #economic_line {
-    width: 60%;
-    display: table-cell;
-    vertical-align: middle;
-    margin: auto;
+    display: table-row;
+    margin: 0 auto;
+    min-width: 400px;
+	height: 400px;
 }
 
 #tableau {
-    margin-top: 350px;
+    margin-top: 420px;
 }
 
 #spacer {
