@@ -189,7 +189,6 @@ header {
   height: 90px;
   line-height: 90px;
   text-align: center;
-  /*border: 2px dashed #f69c55;*/
 }
 
 #sources {
@@ -619,3 +618,15 @@ text {
     fill: white;
 }
 /*ends here*/
+
+#pop_describe {
+    display: inline-block;
+}
+
+#pop_bars {
+    display: inline-block;
+}
+
+#pop {
+    display: inline-block;
+}
