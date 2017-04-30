@@ -229,12 +229,12 @@
     </section>
 
     <section id="secondsection">
-        <h2 style="text-align: center; color: black; height: 8vh;">
+        <h2 style="text-align: center; color: black; height: 10vh;">
             <i>Property abandonment is a symptom of underlying disease</i>
         </h2>
         <div id="pop">
             <div id="pop_describe">
-                <p>A gradual reduction in city population can cause higher vacancy rate of homes and other property types within that city. The cities on the left are the ones that have lost at least 20% of their population since 1950. Detroit presents a glaring example - its population has declined by 62% since 1950 after the city's lifeblood, the automobile industry, could not profitably compete globally anymore.
+                <p style="font-size: 1.3em;">A gradual reduction in city population can cause higher vacancy rate of homes and other property types within that city. The cities on the left are the ones that have lost at least 20% of their population since 1950. Detroit presents a glaring example - its population has declined by 62% since 1950 after the city's lifeblood, the automobile industry, could not profitably compete globally anymore.
                 </p>
             </div>
             <div id="pop_bars">  
@@ -259,7 +259,7 @@
 
                     function createVisualization(){
                         // Width and height of SVG
-                        var w = 900;
+                        var w = 800;
                         var h = 350;
                         var y_offset = 90;
 
@@ -344,12 +344,17 @@
                             .attr("text-anchor", "middle")
                             .text("Size of Population")
                             .attr("transform", "translate(15, 150) rotate(-90)")
-                            .style("fill",'black');
+                            .style("font-family", "open sans")
+                            .style("font-size", "12px")
+                            .style('fill','#555');
                         
                         // add year text
                         svg.append("text")
                             .attr("class", "year label")
                             .attr("text-anchor", "middle")
+                            .style("font-family", "open sans")
+                            .style("font-size", "12px")
+                            .style('fill','#555')
                             .text("Year: 1950")
                             .attr("transform", "translate(75, 50)")
                             .style("fill",'black')
@@ -364,16 +369,16 @@
                             .append("text")
                             .attr("class", "x label")
                             .attr("text-anchor", "end")
-                            .style("font-family", 'Helvetica Neue')
-                            .style("font-size", "10px")
-                            .style('fill','#000000')
+                            .style("font-family", 'open sans')
+                            .style("font-size", "11px")
+                            .style('fill','#555')
                             .text(function(d){ return d.city; })
-                            .attr("transform", function(d,i) {return ("translate(" + ((x_axisLength/arrayLength)*i +37) + ", 270) rotate(-90)"); });
+                            .attr("transform", function(d,i) {return ("translate(" + ((x_axisLength/arrayLength)*i +40) + ", 270) rotate(-90)"); });
                         
                         var tooltip = d3.select("body")
                             .append("div")
                             .style("position", "absolute")
-                            .style("font-family", "Helvetica Neue")
+                            .style("font-family", "open sans")
                             .style("font-size", "12px")
                             .style("color", "black")
                             .style("background", "white")
@@ -391,9 +396,9 @@
             <div style="display: inline; float: left; text-align: left; padding: 10px;">
                 Economic crises can cripple cities affecting large scale foreclosures and declines in property values, making them less attractive to buyers. Detroit shows a glaring example of this phenomenon during the economic resession of 2008, when tax foreclosures increased significantly and home values dropped in addition to continuous flight of people. 
             </div>
-<!--             <div style="display: inline; float:right;">
-                <img src="assets/foreclosures.png" width="800" height="auto">
-            </div> -->
+             <div style="display: inline; float:right;">
+                <img src="assets/foreclosures.png" width="700" height="auto">
+            </div> 
 
         </div>      
     </section>

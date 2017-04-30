@@ -620,13 +620,21 @@ text {
 /*ends here*/
 
 #pop_describe {
-    display: inline-block;
+    width: 40%;
+/*    float: left;*/
+    padding: 25px;
+    display: table-cell;
+    vertical-align: middle;
+    font-family: "open sans";
 }
 
 #pop_bars {
-    display: inline-block;
+    width: 60%;
+/*    float: left;*/
+    display: table-cell;
+    vertical-align: middle;
 }
 
 #pop {
-    display: inline-block;
+    display: table;
 }
