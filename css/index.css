@@ -45,7 +45,6 @@ p, span {
 
 
 section {
-  height:100vh;
   padding-top: 10px;
 }
 
@@ -85,27 +84,32 @@ header {
 #definition {
   background-color: #ffffff;
   margin-top: 50px;
+  height: 100%;
 }
 
 #types_section { 
     background-color: #ffffff;
+    height: 100%;
 }
 
 #secondsection { 
     background-color: #ffffff;
+    height: 100%;
 }
 
 #thirdsection {
     background-color: #ffffff;
-/*    height: 150vh;*/
+    height: 100%;
 }
 
 #finalsection {
   background-color: #ffffff;
+  height: 100%;
 }
 
 #portfolio {
   background-color: #ffffff;
+  height: 100%;
 }
 
 
@@ -122,20 +126,20 @@ header {
 
 
 .pic1{
-  background-color: blue;
+  background-color: white;
   width: 300px;
   text-align: center;
 }
 
 .or{
-  background-color: yellow;
+  background-color: white;
   width: 100px;
   text-align: center;
 
 }
 
 .pic2 {
-  background-color: red;
+  background-color: white;
   width: 300px;
   text-align: center;
 }
@@ -593,7 +597,6 @@ text {
     width: 40%;
     display: table-cell;
     vertical-align: middle;
-    font-family: "open sans";
 }
 
 #pop_bars {
@@ -616,7 +619,6 @@ text {
 #economic_describe {
     display: table-row;
     text-align: center;
-    font-family: "open sans";
     margin: 15px;
 }
 
@@ -627,12 +629,13 @@ text {
 }
 
 #tableau {
-    margin-top: 650px;
+  padding-top: 1000px;
 }
 
 #spacer {
     display: block;
     margin: 1px;
+
 }
 
 .spacer {
@@ -640,6 +643,9 @@ text {
     float: left;
     margin: auto;
     width: 100%;
+    padding-top: 20px;
+    padding-bottom: 50px;
+
 }
 
   .arrow{
@@ -740,19 +746,19 @@ text {
   margin-bottom: 5%;
   justify-content: flex-start;
   height: 100px;
-  background-color: yellow;
+  /*background-color: yellow;*/
 }
 
 .left_div {
   width:300px;
   margin: auto;
-  background-color: red;
+  /*background-color: red;*/
 }
 
 .right_div {
   width:300px;
   margin: auto;
-  background-color: green;
+  /*background-color: green;*/
 }
 
 #photo-block-vicious {
@@ -767,16 +773,14 @@ text {
   background-position: center;
   text-align: center;
   height: 40%;
-  padding: 100px 15px 100px;
+  padding: 10% 1% 10%;
   margin-top: 0;
   margin-bottom: 0;
-  font-size: 30px;
   color: black;
   font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
   font-weight: 700;
   text-transform: uppercase;
   font-size: 40px;
-  text-align: center;
 }
 
 #photo-block-chicago {
@@ -789,13 +793,10 @@ text {
   background-size: cover;
   -o-background-size: cover;
   background-position: center;
-  text-align: center;
-  color: white;
-  padding: 100px 15px 100px;
+  padding: 10% 1% 10%;
   margin-top: 0;
   margin-bottom: 0;
   margin-left: 0;
-  font-size: 30px;
   color: black;
   font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
   font-weight: 700;
