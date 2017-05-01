@@ -101,56 +101,43 @@ header {
 }
 
 #finalsection {
-	background-color: #ffffff;
+  background-color: #ffffff;
 }
 
 #portfolio {
   background-color: #ffffff;
 }
 
-#case_study {
-  /*background-color: #5A2A27;*/
-  height: 40vh;
-}
 
 .parent {
   display: -webkit-flex;
   display: flex;
-  height: 20vh;
-  margin-top:2%;
-  justify-content: center;
+  -webkit-flex-direction: row;
+  flex-direction: row;
+  -webkit-align-items: center;
   align-items: center;
+  -webkit-justify-content: center;
+  justify-content: center;
 }
 
 
 .pic1{
-  -webkit-flex: 1;
-  flex: 1;
-  background-color: white;
-  display: flex;
-  justify-content: center; /* align horizontal */
-  align-items: center; /* align vertical */
+  background-color: blue;
+  width: 300px;
+  text-align: center;
 }
 
 .or{
-  -webkit-align-items: center;
-  align-items: center;
-  background-color: white;
+  background-color: yellow;
   width: 100px;
   text-align: center;
-  vertical-align: middle;
-  align-items: center;
-  justify-content: center;
-  line-height: 20vh;
+
 }
 
 .pic2 {
-  -webkit-flex: 1;
-  flex: 1;
-  background-color: white;
-  display: flex;
-  justify-content: center; /* align horizontal */
-  align-items: center; /* align vertical */
+  background-color: red;
+  width: 300px;
+  text-align: center;
 }
 
 #subheader {
@@ -608,7 +595,6 @@ text {
     display: table-cell;
     vertical-align: middle;
     font-family: "open sans";
-    text-align: center;
 }
 
 #pop_bars {
@@ -770,7 +756,7 @@ text {
   background-color: green;
 }
 
-#photo-block {
+#photo-block-vicious {
   background-image: url("../img/empty.jpg");
   position: relative;
   width: 100%;
@@ -781,16 +767,42 @@ text {
   -o-background-size: cover;
   background-position: center;
   text-align: center;
-  color: white;
   height: 40%;
   padding: 100px 15px 100px;
-  font-weight: 700;
   margin-top: 0;
   margin-bottom: 0;
   font-size: 30px;
-
+  color: black;
+  font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 40px;
+  text-align: center;
 }
 
+#photo-block-chicago {
+  background-image: url("../img/stairs_cut3.jpg");
+  position: relative;
+  width: 100%;
+  min-height: auto;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  -o-background-size: cover;
+  background-position: center;
+  text-align: center;
+  color: white;
+  padding: 100px 15px 100px;
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: 30px;
+  color: black;
+  font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 40px;
+  text-align: center;
+}
 
 
 
