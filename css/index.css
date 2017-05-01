@@ -122,15 +122,6 @@ header {
   align-items: center;
 }
 
-.left {
-  -webkit-flex: initial;
-  flex: initial;
-  width: 20%;
-  /*min-width: 100px;*/
-  background-color: yellow;
-}
-
-.right
 
 .pic1{
   -webkit-flex: 1;
@@ -741,7 +732,7 @@ text {
   margin:auto;
 }
 
-#homeHeading {
+.homeHeading {
   background-color: white;
   opacity: 0.5;
   color: black;
@@ -777,3 +768,28 @@ text {
   margin: auto;
   background-color: green;
 }
+
+#photo-block {
+  background-image: url("../img/empty.jpg");
+  position: relative;
+  width: 100%;
+  min-height: auto;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  -o-background-size: cover;
+  background-position: center;
+  text-align: center;
+  color: white;
+  height: 40%;
+  padding: 100px 15px 100px;
+  font-weight: 700;
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: 30px;
+
+}
+
+
+
+
