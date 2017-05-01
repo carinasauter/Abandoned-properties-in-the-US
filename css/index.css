@@ -84,22 +84,18 @@ header {
 #definition {
   background-color: #ffffff;
   margin-top: 50px;
-  height: 100%;
 }
 
 #types_section { 
     background-color: #ffffff;
-    height: 100%;
 }
 
 #secondsection { 
     background-color: #ffffff;
-    height: 100%;
 }
 
 #thirdsection {
     background-color: #ffffff;
-    height: 100%;
 }
 
 #finalsection {
@@ -109,7 +105,6 @@ header {
 
 #portfolio {
   background-color: #ffffff;
-  height: 100%;
 }
 
 
@@ -628,9 +623,6 @@ text {
     min-width: 400px;
 }
 
-#tableau {
-  padding-top: 1000px;
-}
 
 #spacer {
     display: block;
@@ -643,8 +635,9 @@ text {
     float: left;
     margin: auto;
     width: 100%;
-    padding-top: 20px;
+    padding-top: 50px;
     padding-bottom: 50px;
+
 
 }
 
@@ -695,15 +688,12 @@ text {
     }
   }
 
-#cycle_viz {
-  height: 120vh;
-}
 
 .parent_viz {
   display: -webkit-flex;
   display: flex;
   margin-top:2%;
-  margin-bottom: 5%;
+  margin-bottom: 1%;
   width:100%;
 
 }
