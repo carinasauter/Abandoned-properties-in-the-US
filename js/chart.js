@@ -3,6 +3,9 @@
 // New dataset read from CSV
 var popData = [];
 
+//var svg2 = d3.select("#pop_describe");
+
+
 d3.csv("data/city_pop.csv", function(d) {
     return {
         city : d.city, // city name
@@ -21,6 +24,10 @@ function createVisualization(){
     var h = 350;
     var y_offset = 90;
 
+    d3.select("#pop_describe")
+        .select("#btnPlay")
+        .text("Play to see change");
+    
     // Get length of dataset
     var arrayLength = popData.length; // length of dataset
     var maxValue = d3.max(popData, function(d) { return +d.peak;} ); // get max value of our dataset
@@ -34,9 +41,9 @@ function createVisualization(){
 
     //Create SVG element
     var svg = d3.select("#pop_bars")
-    .append("svg")
-    .attr("width", w)
-    .attr("height", h);
+        .append("svg")
+        .attr("width", w)
+        .attr("height", h);
 
     // Select and generate rectangle elements
     svg.selectAll( "rect.peak" )
@@ -131,14 +138,38 @@ function createVisualization(){
             return function(t) { that.text(format(i(t))); };
         });
     svg.selectAll(".nowbars")
-        .transition()
-        .duration(5000)
-        .attr( "x", function(d,i){ return (x_axisLength/arrayLength)*i + 30;  } )
-        .attr( "y", function(d) { return h - y_offset - yScale(d.now_pop);  } )
-        .attr( "width", (x_axisLength/arrayLength)-5 )
-        .attr( "height", function(d){ return yScale(d.now_pop); });
+        // create second stack of bars initially showing peak population
+            .data( popData )
+            .attr("class", "nowbars")
+            .attr( "x", function(d,i){
+            return (x_axisLength/arrayLength)*i + 30;  } )
+            .attr( "y", function(d) {
+            return h - y_offset - yScale(d.peak);  } )
+            .attr( "width", (x_axisLength/arrayLength)-5 )
+            .attr( "height", function(d){
+            return yScale(d.peak); })
+            .attr( "fill", "#8B786D")
+            .on("mouseover", function(d){
+            return tooltip.style("visibility", "visible").html(d.city + "<br>" + "Peak population: " +d3.format(",")(d.peak) + "<br>" + "2010 Population: " + +d3.format(",")(d.now_pop)); })
+            .on("mousemove", function(d){
+            return tooltip.style("top", (event.pageY-45)+"px").style("left",(event.pageX+5)+"px").html(d.city + "<br>" + "Peak population: " + d3.format(",")(d.peak) + "<br>" + "2010 Population: " + d3.format(",")(d.now_pop)); })
+            .on("mouseout", function(d){ return tooltip.style("visibility", "hidden"); })
+            .transition()
+            .duration(5000)
+            .attr( "x", function(d,i){ return (x_axisLength/arrayLength)*i + 30;  } )
+            .attr( "y", function(d) { return h - y_offset - yScale(d.now_pop);  } )
+            .attr( "width", (x_axisLength/arrayLength)-5 )
+            .attr( "height", function(d){ return yScale(d.now_pop); });
     });
+        d3.select("#pop_describe")
+            .select("#btnPlay")
+            .text("Play again");
     });
+    
+    svg2.select("#btnReset")
+        .on("click", function() {    
+        createVisualization();});
+
     
     // add city names on x-axis
     svg.selectAll( "rect.now" )
