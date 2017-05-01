@@ -119,7 +119,7 @@ function createVisualization(){
     svg2.select("#btnPlay")
         .on("click", function() {    
     // text transition inspired by Mike Bostock's example at: https://bl.ocks.org/mbostock/7004f92cac972edef365
-    var format = d3.format(",d");
+    var format = d3.format("d");
     svg.select(".yearlabel")
         .transition()
         .duration(5000)
