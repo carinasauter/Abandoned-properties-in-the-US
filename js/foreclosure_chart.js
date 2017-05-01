@@ -1,3 +1,5 @@
+// Chart adapted from Hightcharts official template available at: https://www.highcharts.com/demo/combo-multi-axes
+
 $(function () {
     var chart;
     $(document).ready(function() {
@@ -106,6 +108,7 @@ $(function () {
                         renderTo: 'poverty_chart',
                         zoomType: 'xy',
                         marginLeft: 100,
+                        marginRight: 100,
                         spacingTop: 50
                     },
                     title: {
@@ -173,7 +176,7 @@ $(function () {
                                 color: '#4a934a'
                             }
                         },
-                        opposite: true
+                        opposite: false
                     }],
                     tooltip: {
                         shared: true
@@ -198,7 +201,7 @@ $(function () {
                         },
                         dashStyle: 'shortdot',
                         tooltip: {
-                            valueSuffix: ' K'
+                            valueSuffix: ' thousand'
                         }
 
                     }]

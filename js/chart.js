@@ -11,7 +11,6 @@ d3.csv("data/city_pop.csv", function(d) {
     };
 }, function(error, rows) { // catch error if error, read rows
     popData = rows; // set popData equal to rows
-    // console.log(popData); 
     createVisualization(); // call function to create chart
 });
 
@@ -44,6 +43,7 @@ function createVisualization(){
         .data( popData )
         .enter()
         .append("rect")
+        .attr("class", "peakbars")
         .attr( "x", function(d,i){
         return (x_axisLength/arrayLength)*i + 30;  } )
         .attr( "y", function(d) {
@@ -69,6 +69,7 @@ function createVisualization(){
         .data( popData )
         .enter()
         .append("rect")
+        .attr("class", "nowbars")
         .attr( "x", function(d,i){
         return (x_axisLength/arrayLength)*i + 30;  } )
         .attr( "y", function(d) {
@@ -81,13 +82,7 @@ function createVisualization(){
         return tooltip.style("visibility", "visible").html(d.city + "<br>" + "Peak population: " +d3.format(",")(d.peak) + "<br>" + "2010 Population: " + +d3.format(",")(d.now_pop)); })
         .on("mousemove", function(d){
         return tooltip.style("top", (event.pageY-45)+"px").style("left",(event.pageX+5)+"px").html(d.city + "<br>" + "Peak population: " + d3.format(",")(d.peak) + "<br>" + "2010 Population: " + d3.format(",")(d.now_pop)); })
-        .on("mouseout", function(d){ return tooltip.style("visibility", "hidden"); })
-        .transition()
-        .duration(5000)
-        .attr( "x", function(d,i){ return (x_axisLength/arrayLength)*i + 30;  } )
-        .attr( "y", function(d) { return h - y_offset - yScale(d.now_pop);  } )
-        .attr( "width", (x_axisLength/arrayLength)-5 )
-        .attr( "height", function(d){ return yScale(d.now_pop); });
+        .on("mouseout", function(d){ return tooltip.style("visibility", "hidden"); });
 
     // Add axes
     svg.append("line")
@@ -107,19 +102,43 @@ function createVisualization(){
         .style("font-size", "12px")
         .style('fill','#555');
     
+    
+//    var i = d3.interpolate(1950, 2010);
     // add year text
     svg.append("text")
-        .attr("class", "year label")
+        .attr("class", "yearlabel")
         .attr("text-anchor", "middle")
         .style("font-family", "open sans")
-        .style("font-size", "12px")
+        .style("font-size", "14px")
         .style('fill','#555')
-        .text("Year: 1950")
-        .attr("transform", "translate(75, 50)")
-        .style("fill",'black')
-        .transition() // Year transition not working yet
+        .text("1950")
+        .attr("transform", "translate(75, 50)");    
+    
+    var svg2 = d3.select("#pop_describe")
+
+    svg2.select("#btnPlay")
+        .on("click", function() {    
+    // text transition inspired by Mike Bostock's example at: https://bl.ocks.org/mbostock/7004f92cac972edef365
+    var format = d3.format(",d");
+    svg.select(".yearlabel")
+        .transition()
         .duration(5000)
-        .attr("text", "Year: 2010");
+        .on("start", function repeat() {
+        d3.active(this)
+            .tween("text", function() {
+            var that = d3.select(this),
+                i = d3.interpolateNumber(1950, 2010);
+            return function(t) { that.text(format(i(t))); };
+        });
+    svg.selectAll(".nowbars")
+        .transition()
+        .duration(5000)
+        .attr( "x", function(d,i){ return (x_axisLength/arrayLength)*i + 30;  } )
+        .attr( "y", function(d) { return h - y_offset - yScale(d.now_pop);  } )
+        .attr( "width", (x_axisLength/arrayLength)-5 )
+        .attr( "height", function(d){ return yScale(d.now_pop); });
+    });
+    });
     
     // add city names on x-axis
     svg.selectAll( "rect.now" )
@@ -147,4 +166,6 @@ function createVisualization(){
         .style("border", "0px")
         .style("z-index", "10")
         .style("visibility", "hidden");
+    var format = d3.format(",d");
+
 };  
