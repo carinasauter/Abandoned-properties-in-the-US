@@ -37,15 +37,15 @@ h6 {
   font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
 }
 
-p {
+p, span {
   font-size: 16px;
   line-height: 1.5;
+  padding-left: 10px;
 }
 
 
 section {
   height:100vh;
-  padding-left: 10px;
   padding-top: 10px;
 }
 
@@ -591,7 +591,6 @@ text {
 
 #pop_describe {
     width: 40%;
-    padding: 25px;
     display: table-cell;
     vertical-align: middle;
     font-family: "open sans";
@@ -795,6 +794,7 @@ text {
   padding: 100px 15px 100px;
   margin-top: 0;
   margin-bottom: 0;
+  margin-left: 0;
   font-size: 30px;
   color: black;
   font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
@@ -804,5 +804,10 @@ text {
   text-align: center;
 }
 
+.myButton:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
 
 
