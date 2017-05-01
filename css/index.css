@@ -101,75 +101,44 @@ header {
 }
 
 #finalsection {
-	background-color: #ffffff;
+  background-color: #ffffff;
 }
 
 #portfolio {
   background-color: #ffffff;
 }
 
-#case_study {
-  /*background-color: #5A2A27;*/
-  height: 40vh;
-}
 
 .parent {
   display: -webkit-flex;
   display: flex;
-  height: 20vh;
-  margin-top:2%;
-  justify-content: center;
+  -webkit-flex-direction: row;
+  flex-direction: row;
+  -webkit-align-items: center;
   align-items: center;
+  -webkit-justify-content: center;
+  justify-content: center;
 }
 
-.left {
-  -webkit-flex: initial;
-  flex: initial;
-  width: 20%;
-  /*min-width: 100px;*/
-  background-color: yellow;
-}
 
 .pic1{
-  -webkit-flex: 1;
-  flex: 1;
-  background-color: white;
-  display: flex;
-  justify-content: center; /* align horizontal */
-  align-items: center; /* align vertical */
+  background-color: blue;
+  width: 300px;
+  text-align: center;
 }
 
 .or{
-  -webkit-align-items: center;
-  align-items: center;
-  background-color: white;
+  background-color: yellow;
   width: 100px;
   text-align: center;
-  vertical-align: middle;
-  align-items: center;
-  justify-content: center;
-  line-height: 20vh;
+
 }
 
 .pic2 {
-  -webkit-flex: 1;
-  flex: 1;
-  background-color: white;
-  display: flex;
-  justify-content: center; /* align horizontal */
-  align-items: center; /* align vertical */
-}
-
-.right {
-  -webkit-flex: 1;
-  flex: 1;
-  width: 20%;
-  /*min-width: 100px;*/
   background-color: red;
+  width: 300px;
+  text-align: center;
 }
-
-
-
 
 #subheader {
   color: #000000;
@@ -656,11 +625,10 @@ text {
     display: table-row;
     margin: 0 auto;
     min-width: 400px;
-	height: 400px;
 }
 
 #tableau {
-    margin-top: 420px;
+    margin-top: 650px;
 }
 
 #spacer {
@@ -722,30 +690,36 @@ text {
     }
   }
 
+#cycle_viz {
+  height: 120vh;
+}
 
 .parent_viz {
   display: -webkit-flex;
   display: flex;
-  height: 100vh;
   margin-top:2%;
-  align-items: center;
-  flex-wrap: wrap;
+  margin-bottom: 5%;
+  width:100%;
 
 }
 
+/*#cycle_viz {
+  height: 120vh; 
+}*/
+
 .viz_text{
-  -webkit-flex: 1;
-  flex: 2;
+  width: 60%;
+  margin: auto;
+
   /*background-color: green;*/
 }
 
 .viz_graph {
-  -webkit-flex: 1;
-  flex: 1;
   /*background-color: blue;*/
+  margin:auto;
 }
 
-#homeHeading {
+.homeHeading {
   background-color: white;
   opacity: 0.5;
   color: black;
@@ -755,3 +729,80 @@ text {
   margin-top: 100px;
   border-radius: 10px;
 }
+
+#crime_stats {
+  width: 300px;
+}
+
+.parent_div {
+  display: -webkit-flex;
+  display: flex;
+  margin-top:2%;
+  margin-bottom: 5%;
+  justify-content: flex-start;
+  height: 100px;
+  background-color: yellow;
+}
+
+.left_div {
+  width:300px;
+  margin: auto;
+  background-color: red;
+}
+
+.right_div {
+  width:300px;
+  margin: auto;
+  background-color: green;
+}
+
+#photo-block-vicious {
+  background-image: url("../img/empty.jpg");
+  position: relative;
+  width: 100%;
+  min-height: auto;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  -o-background-size: cover;
+  background-position: center;
+  text-align: center;
+  height: 40%;
+  padding: 100px 15px 100px;
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: 30px;
+  color: black;
+  font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 40px;
+  text-align: center;
+}
+
+#photo-block-chicago {
+  background-image: url("../img/stairs_cut3.jpg");
+  position: relative;
+  width: 100%;
+  min-height: auto;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  -o-background-size: cover;
+  background-position: center;
+  text-align: center;
+  color: white;
+  padding: 100px 15px 100px;
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: 30px;
+  color: black;
+  font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 40px;
+  text-align: center;
+}
+
+
+
