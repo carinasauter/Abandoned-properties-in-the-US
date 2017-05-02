@@ -235,24 +235,24 @@ aside {
 }
 @media (min-width: 768px) {
   .navbar-default {
-    background-color: white;
-    opacity: 0.5;
+    background-color: gray;
+    opacity: 0.7;
     border-color: rgba(255, 255, 255, 0.3);
   }
   .navbar-default .navbar-header .navbar-brand {
-    color: black; /*rgba(255, 255, 255, 0.7)*/
+    color: white; /*rgba(255, 255, 255, 0.7)*/
   }
   .navbar-default .navbar-header .navbar-brand:hover,
   .navbar-default .navbar-header .navbar-brand:focus {
-    color: black;
+    color: gray;
   }
   .navbar-default .nav > li > a,
   .navbar-default .nav > li > a:focus {
-    color: black ;/*rgba(255, 255, 255, 0.7)*/
+    color: white ;/*rgba(255, 255, 255, 0.7)*/
   }
   .navbar-default .nav > li > a:hover,
   .navbar-default .nav > li > a:focus:hover {
-    color: black;
+    color: gray;
   }
   .navbar-default.affix {
     background-color: black;
@@ -717,7 +717,7 @@ text {
 
 .homeHeading {
   background-color: white;
-  opacity: 0.5;
+  opacity: 0.6;
   color: black;
   text-align: center;
   margin-left: 100px;
