@@ -88,7 +88,9 @@ header {
 }
 
 #types_section { 
-    background-color: #ffffff;
+    background-color: brown;
+    color: white;
+    padding-top: 50px;
 }
 
 #secondsection { 
@@ -104,9 +106,6 @@ header {
   height: 800px;
 }
 
-#portfolio {
-  background-color: #ffffff;
-}
 
 
 .parent {
@@ -593,12 +592,11 @@ text {
     width: 40%;
     display: table-cell;
     vertical-align: middle;
-<<<<<<< HEAD
     text-align: left;
     padding: 15px;
-=======
+
 /*    text-align: center;*/
->>>>>>> b7076ee3c3109225da28768ac618fe7ca2ce6061
+
 }
 
 #pop_bars {
@@ -628,24 +626,6 @@ text {
 #economic_line {
     display: table;
     text-align: center;
-}
-
-
-#spacer {
-    display: block;
-    margin: 1px;
-
-}
-
-.spacer {
-    display: block;
-    float: left;
-    margin: auto;
-    width: 100%;
-    padding-top: 50px;
-    padding-bottom: 50px;
-
-
 }
 
   .arrow{
