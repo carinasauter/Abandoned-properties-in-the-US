@@ -34,13 +34,14 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+  font-family: 'Open Sans', 'Helvetica Neue', Arial;
 }
 
 p, span {
   font-size: 16px;
   line-height: 1.5;
   padding-left: 10px;
+  font-family:'verdana';
 }
 
 
@@ -592,7 +593,7 @@ text {
     width: 40%;
     display: table-cell;
     vertical-align: middle;
-    text-align: center;
+/*    text-align: center;*/
 }
 
 #pop_bars {
