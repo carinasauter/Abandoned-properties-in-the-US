@@ -8,10 +8,10 @@ $(function () {
     chart: {
         renderTo: 'foreclosure_chart',
         zoomType: 'xy',
-        marginLeft: 100
+//        marginLeft: 100
     },
     title: {
-        text: 'Economic crisis is associated with increasing foreclosure and decreasing home values'
+        text: ''//'Economic crisis is associated with increasing foreclosure and decreasing home values'
     },
     subtitle: {
         text: 'Source: US Census data'
@@ -25,7 +25,7 @@ $(function () {
             from: 2.5,
             to: 4.1,
             label: {
-                text: 'Economic Recession',
+                text: 'Recession',
                 style: {
                     color: 'white',
                     fontFamily: 'open sans',
@@ -61,7 +61,8 @@ $(function () {
             format: '{value} K',
             style: {
                 color: '#AF9164'
-            }
+            },
+            opposite: true
         }
 
     }],
@@ -75,7 +76,7 @@ $(function () {
         verticalAlign: 'top',
         y: 55,
         floating: true,
-        backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
+        backgroundColor: 'rgba(255, 255, 255, 0.42)' //(Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
     },
     series: [{
         name: 'Foreclosures',
@@ -107,12 +108,15 @@ $(function () {
                     chart: {
                         renderTo: 'poverty_chart',
                         zoomType: 'xy',
-                        marginLeft: 100,
-                        marginRight: 100,
-                        spacingTop: 50
+//                        marginLeft: 100,
+//                        marginRight: 100,
+//                        spacingTop: 50
                     },
                     title: {
-                        text: '...and also associated with increasing poverty'
+                        text: '' //'...and also associated with increasing poverty'
+                    },
+                    subtitle: {
+                        text: 'US Census data' //'Source: US Census data'
                     },
                     xAxis: [{
                         categories: ['2005', '2006', '2007', '2008', '2009', '2010',
@@ -123,7 +127,7 @@ $(function () {
                             from: 2.5,
                             to: 4.1,
                             label: {
-                                text: 'Economic Recession',
+                                text: 'Recession',
                                 style: {
                                     color: 'white',
                                     fontFamily: 'open sans',
@@ -145,7 +149,7 @@ $(function () {
                                 color: '#6F1A07'
                             }
                         },
-                        opposite: true
+                        opposite: false
 
                     }, { // Secondary yAxis - foreclosures
                         gridLineWidth: 0,
@@ -176,7 +180,7 @@ $(function () {
                                 color: '#4a934a'
                             }
                         },
-                        opposite: false
+                        opposite: true
                     }],
                     tooltip: {
                         shared: true
@@ -188,7 +192,7 @@ $(function () {
                         verticalAlign: 'top',
                         y: 55,
                         floating: true,
-                        backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
+                        backgroundColor: 'rgba(255, 255, 255, 0.42)'//(Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
                     },
                     series: [{
                         name: 'People below poverty',

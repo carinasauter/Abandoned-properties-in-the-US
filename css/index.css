@@ -592,7 +592,8 @@ text {
     width: 40%;
     display: table-cell;
     vertical-align: middle;
-    text-align: center;
+    text-align: left;
+    padding: 15px;
 }
 
 #pop_bars {
@@ -603,25 +604,25 @@ text {
 
 #pop {
     display: table;
+    margin-top: 15px;
 }
 
 #economic {
-    display: table;
-    margin-top: 40px;
+    margin-top: 35px;
+    margin-bottom: 35px;
     margin-left: auto;
     margin-right: auto;
 }
 
 #economic_describe {
-    display: table-row;
+    width: 95%;
     text-align: center;
-    margin: 15px;
+    margin: auto;
 }
 
 #economic_line {
-    display: table-row;
-    margin: 0 auto;
-    min-width: 400px;
+    display: table;
+    text-align: center;
 }
 
 
@@ -717,7 +718,7 @@ text {
 
 .homeHeading {
   background-color: white;
-  opacity: 0.6;
+  opacity: 0.65;
   color: black;
   text-align: center;
   margin-left: 100px;
@@ -753,7 +754,7 @@ text {
 }
 
 #photo-block-vicious {
-  background-image: url("../img/empty.jpg");
+  background-image: url("../img/empty_fade.jpg");
   position: relative;
   width: 100%;
   min-height: auto;
@@ -803,3 +804,13 @@ text {
 }
 
 
+
+#foreclosure_chart {
+    display: table-cell;
+    width: 50%;
+}
+
+#poverty_chart {
+    display: table-cell;
+    width: 50%;
+}

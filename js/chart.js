@@ -58,7 +58,7 @@ function createVisualization(){
         .attr( "width", (x_axisLength/arrayLength)-5 )
         .attr( "height", function(d){
         return yScale(d.peak); })
-        .attr( "fill", "rgb(232, 223, 219)")
+        .attr( "fill", "rgb(252, 251, 250)")
         .attr("stroke", "#8B786D")
         .attr("stroke-width", "1px")
         .on("mouseover", function(d){
