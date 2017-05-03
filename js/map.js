@@ -206,7 +206,6 @@ map.on('load', function() {
             // Change the cursor style as a UI indicator.
             map.getCanvas().style.cursor = 'pointer';
 
-            var tooltip_fire = 'Abandoned due to fire:  ';
             var tooltip_date = 'Date of service request:  ';
             var tooltip_boarded ='Open or boarded:  ';
             var tooltip_occupied = 'Vacant or occupied:  ';
@@ -215,7 +214,7 @@ map.on('load', function() {
 
             
             popup.setLngLat(e.features[0].geometry.coordinates)
-                .setHTML(table_ini.concat(tooltip_date,'</th><th>',e.features[0].properties.date_service_received,'</th></tr><tr><th>',tooltip_fire,'</th><th>',e.features[0].properties.vacant_fire,'</th></tr>','<tr><th>',tooltip_boarded,'</th><th>',e.features[0].properties.open_or_boarded,'<tr><th>',tooltip_occupied,"</th><th>",e.features[0].properties.vacant_or_occupied,'</th></tr></table>'))
+                .setHTML(table_ini.concat(tooltip_date,'</th><th>',e.features[0].properties.date_service_received,'</th></tr></table>','<p style="font-size: 12px;">This property is <i>',e.features[0].properties.open_or_boarded,'</i> and <i>',e.features[0].properties.vacant_or_occupied,'</i>.</p>'))
                 .addTo(map);
         });
 

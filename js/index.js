@@ -72,22 +72,24 @@ defs.append("marker")
             "refY":0,
             "markerWidth":4,
             "markerHeight":4,
+            "fill":'black',
+            "opacity": 0.8,
             "orient":"auto"
         })
         .append("path")
             .attr("d", "M0,-5L10,0L0,5")
             .attr("class","arrowHead");
 
-defs.append("marker")
-        .attrs({
-            "id":"turtle",
-            "viewBox":"0 0 100 100",
-            "refX":50,
-            "refY":50,
-            "markerWidth":10,
-            "markerHeight":10,
-            "orient":"auto"
-        });
+// defs.append("marker")
+//         .attrs({
+//             "id":"turtle",
+//             "viewBox":"0 0 100 100",
+//             "refX":50,
+//             "refY":50,
+//             "markerWidth":10,
+//             "markerHeight":10,
+//             "orient":"auto"
+//         });
 
 
 // var carinaArc = d3.arc()
@@ -195,7 +197,7 @@ var line8 = svg.append("line")
 
 var circle1 = svg.append("circle")
                 .attr("r", 5)
-                .attr("fill", "blue")
+                .attr("fill", "#6D4C3D")
                 .attr("transform", circTransform1)
                 .on("mouseover", function(){
                     return tooltip.style("visibility", "visible").html("The economic situation worsens.");
@@ -211,7 +213,7 @@ var circle1 = svg.append("circle")
 
 var circle2 = svg.append("circle")
     .attr("r", 5)
-    .attr("fill", "blue")
+    .attr("fill", "#6D4C3D")
     .attr("transform", circTransform2)
     .on("mouseover", function(){
         return tooltip.style("visibility", "visible").html("The unemployment rate increases as " + "<br>" + "companies cut down costs.");
@@ -227,7 +229,7 @@ var circle2 = svg.append("circle")
 
 var circle3 = svg.append("circle")
     .attr("r", 5)
-    .attr("fill", "blue")
+    .attr("fill", "#6D4C3D")
     .attr("transform", circTransform3)
     .on("mouseover", function(){
         return tooltip.style("visibility", "visible").html("Without a job, people default on their mortgages."+ "<br>" + "Their homes enter foreclosure.");
@@ -242,7 +244,7 @@ var circle3 = svg.append("circle")
 
 var circle4 = svg.append("circle")
     .attr("r", 5)
-    .attr("fill", "blue")
+    .attr("fill", "#6D4C3D")
     .attr("transform", circTransform4)
     .on("mouseover", function(){
         return tooltip.style("visibility", "visible").html("Without a home and without the prospect" + '<br>' + "of a new job, people start leaving the city.");
@@ -256,7 +258,7 @@ var circle4 = svg.append("circle")
 
 var circle5 = svg.append("circle")
     .attr("r", 5)
-    .attr("fill", "blue")
+    .attr("fill", "#6D4C3D")
     .attr("transform", circTransform5)
     .on("mouseover", function(){
         return tooltip.style("visibility", "visible")
@@ -271,7 +273,7 @@ var circle5 = svg.append("circle")
 
 var circle6 = svg.append("circle")
     .attr("r", 5)
-    .attr("fill", "blue")
+    .attr("fill", "#6D4C3D")
     .attr("transform", circTransform6)
     .on("mouseover", function(){
         return tooltip.style("visibility", "visible").html("The abandoned homes decrease the quality of life" + '<br>' + 'in the neighborhood as gangs and drug addicts take over the homes.');
@@ -285,7 +287,7 @@ var circle6 = svg.append("circle")
 
 var circle7 = svg.append("circle")
     .attr("r", 5)
-    .attr("fill", "blue")
+    .attr("fill", "red")
     .attr("transform", circTransform7)
     .on("mouseover", function(){
         return tooltip.style("visibility", "visible").html("More people move away.");
@@ -299,7 +301,7 @@ var circle7 = svg.append("circle")
 
 var circle8 = svg.append("circle")
     .attr("r", 5)
-    .attr("fill", "blue")
+    .attr("fill", "#6D4C3D")
     .attr("transform", circTransform8)
     .on("mouseover", function(){
         return tooltip.style("visibility", "visible").html('Less people means less potential employees and less money spent.');
@@ -311,37 +313,3 @@ var circle8 = svg.append("circle")
         return tooltip.style("visibility", "hidden");
     });
 
-
-// stop online code
-
-
-        // var text_box1 = svg.append('text')
-            // .attr("transform", circTransform1)
-            // // .style("position", "absolute")
-            // .style("font-family", "Helvetica Neue")
-            // .style("font-size", "12px")
-            // .style("color", "black")
-            // .style("background", "white")
-            // .style("padding", "4px")
-            // .style("border-radius", "6px")
-            // .style("opacity", 0.8)
-            // .style("border", "0px")
-            // .style("z-index", "10")
-            // .style("visibility", "visible")
-            // .html("<br>" + "Peak population: " + "<br>" + "2010 Population: ");
-
-  //    var text_box2 = svg.append('text')
-  //                       .attr("transform", circTransform2)
-  //                       // .style("position", "absolute")
-  //                       .style("font-family", "Helvetica Neue")
-  //                       .style("font-size", "12px")
-  //                       .style("color", "black")
-  //                       .style("background", "white")
-  //                       .style("padding", "4px")
-  //                       .style("border-radius", "6px")
-  //                       .style("opacity", 0.8)
-  //                       .style("border", "0px")
-  //                       .style("z-index", "10")
-  //                       .style("visibility", "visible")
-  //                       .html("<br>" + "Peak population: " + "<br>" + "2010 Population: ");
-                            
