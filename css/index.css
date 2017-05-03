@@ -819,3 +819,17 @@ text {
     display: table-cell;
     width: 50%;
 }
+
+.spacecol {
+    margin-top: 30px;
+}
+
+.itemcol {
+    margin-top: 30px;
+    text-align: left;
+}
+
+.refcol {
+    margin-top: 30px;
+    text-align: left;
+}
