@@ -627,27 +627,23 @@ text {
     text-align: center;
 }
 
-  .arrow{
-    stroke-width:5;
-    stroke:#000;
-    stroke-dasharray:5, 5;
-  }
+.arrow{
+  stroke-width:5;
+  stroke:#000;
+  stroke-dasharray:5, 5;
+  fill:grey;
+}
 
-  circle{
-    stroke-width:5;
-    stroke:blue;
-    fill:blue;
-  }
-
-  #turtle-icon, #arrow{
-    stroke-width:1;
-    stroke-dasharray:0; 
-  }
+circle{
+  stroke-width:5;
+  stroke:#6D4C3D;
+  fill:#6D4C3D;
+}
 
   .flowline {
     fill: none;
     stroke: black;
-    opacity: 1;
+    opacity: 0.8;
     stroke-width: 4;
     stroke-dasharray: 10, 4;
     animation: flow 1s linear infinite;
@@ -684,19 +680,12 @@ text {
 
 }
 
-/*#cycle_viz {
-  height: 120vh; 
-}*/
-
 .viz_text{
   width: 60%;
   margin: auto;
-
-  /*background-color: green;*/
 }
 
 .viz_graph {
-  /*background-color: blue;*/
   margin:auto;
 }
 
@@ -799,7 +788,7 @@ text {
 }
 
 #services {
-  background-color: #F05F40;
+  /*background-color: #F05F40;*/
   padding-top: 4%;
   height: 50vh;
 }
