@@ -3,10 +3,12 @@ html,body {
     padding:0;
     height:100%;
     width: 100%; 
+    position: relative;
 }
 
 body {
   font-family: 'Merriweather', 'Helvetica Neue', Arial, sans-serif;
+
 }
 
 /* line between header and subheader */
@@ -51,7 +53,7 @@ section {
 
 button {
   margin-top: 10px;
-  background-color: #A5978B; /* Green */
+  background-color: #A5978B;
   border: none;
   color: white;
   padding: 10px 10px;
@@ -85,11 +87,12 @@ header {
 #definition {
   background-color: #ffffff;
   margin-top: 50px;
+  position: relative;
 }
 
 #types_section { 
-    background-color: #6D4C3D;
-    color: white;
+    background-color: #ffffff;
+    color: black;
     padding-top: 50px;
 }
 
@@ -103,7 +106,7 @@ header {
 
 #finalsection {
   background-color: #ffffff;
-  height: 800px;
+  height: 1000px;
 }
 
 
@@ -198,19 +201,19 @@ aside {
   transition: all 0.35s;
 }
 .navbar-default .navbar-header .navbar-brand {
-  color: #F05F40; /*some kind of orange*/
+  color: white;
   font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
   font-weight: 700;
   text-transform: uppercase;
 }
 .navbar-default .navbar-header .navbar-brand:hover,
 .navbar-default .navbar-header .navbar-brand:focus {
-  color: #eb3812;
+  color: black;
 }
 .navbar-default .navbar-header .navbar-toggle {
   font-weight: 700;
   font-size: 12px;
-  color: #222222;
+  color: #222222; /*black*/
   text-transform: uppercase;
 }
 .navbar-default .nav > li > a,
@@ -218,53 +221,49 @@ aside {
   text-transform: uppercase;
   font-weight: 700;
   font-size: 13px;
-  color: #222222;
+  color: white; /*black*/
 }
 .navbar-default .nav > li > a:hover,
 .navbar-default .nav > li > a:focus:hover {
-  color: #5C4742;
+  color: white; /*brown*/
 }
-.navbar-default .nav > li.active > a,
-.navbar-default .nav > li.active > a:focus {
-  color: #F05F40 !important; /*orange*/
-  background-color: transparent;
-}
+
 .navbar-default .nav > li.active > a:hover,
 .navbar-default .nav > li.active > a:focus:hover {
-  background-color: blue;
+  background-color: transparent;
 }
 @media (min-width: 768px) {
   .navbar-default {
-    background-color: gray;
+    background-color: white;
     opacity: 0.7;
-    border-color: rgba(255, 255, 255, 0.3);
+    /*border-color: rgba(255, 255, 255, 0.3);*/
   }
   .navbar-default .navbar-header .navbar-brand {
-    color: white; /*rgba(255, 255, 255, 0.7)*/
+    color: black; /*rgba(255, 255, 255, 0.7)*/
   }
   .navbar-default .navbar-header .navbar-brand:hover,
   .navbar-default .navbar-header .navbar-brand:focus {
-    color: gray;
+    color: black;
   }
   .navbar-default .nav > li > a,
   .navbar-default .nav > li > a:focus {
-    color: white ;/*rgba(255, 255, 255, 0.7)*/
+    color: black ;/*rgba(255, 255, 255, 0.7)*/
   }
   .navbar-default .nav > li > a:hover,
   .navbar-default .nav > li > a:focus:hover {
-    color: gray;
+    color: black;
   }
   .navbar-default.affix {
     background-color: black;
-    border-color: rgba(34, 34, 34, 0.05);
+    border-color: black;
   }
   .navbar-default.affix .navbar-header .navbar-brand {
-    color: #F05F40;
+    color: white;
     font-size: 14px;
   }
   .navbar-default.affix .navbar-header .navbar-brand:hover,
   .navbar-default.affix .navbar-header .navbar-brand:focus {
-    color: #eb3812;
+    color: white;
   }
   .navbar-default.affix .nav > li > a,
   .navbar-default.affix .nav > li > a:focus {
@@ -272,7 +271,7 @@ aside {
   }
   .navbar-default.affix .nav > li > a:hover,
   .navbar-default.affix .nav > li > a:focus:hover {
-    color: #F05F40;
+    color: white;
   }
 }
 
@@ -797,4 +796,10 @@ text {
 #poverty_chart {
     display: table-cell;
     width: 50%;
+}
+
+#services {
+  background-color: #F05F40;
+  padding-top: 4%;
+  height: 50vh;
 }

@@ -195,7 +195,7 @@ var line8 = svg.append("line")
 
 var circle1 = svg.append("circle")
                 .attr("r", 5)
-                .attr("fill", "blue")
+                .attr("fill", "brown")
                 .attr("transform", circTransform1)
                 .on("mouseover", function(){
                     return tooltip.style("visibility", "visible").html("The economic situation worsens.");
@@ -211,7 +211,7 @@ var circle1 = svg.append("circle")
 
 var circle2 = svg.append("circle")
     .attr("r", 5)
-    .attr("fill", "blue")
+    .attr("fill", "brown")
     .attr("transform", circTransform2)
     .on("mouseover", function(){
         return tooltip.style("visibility", "visible").html("The unemployment rate increases as " + "<br>" + "companies cut down costs.");
@@ -227,7 +227,7 @@ var circle2 = svg.append("circle")
 
 var circle3 = svg.append("circle")
     .attr("r", 5)
-    .attr("fill", "blue")
+    .attr("fill", "brown")
     .attr("transform", circTransform3)
     .on("mouseover", function(){
         return tooltip.style("visibility", "visible").html("Without a job, people default on their mortgages."+ "<br>" + "Their homes enter foreclosure.");
@@ -242,7 +242,7 @@ var circle3 = svg.append("circle")
 
 var circle4 = svg.append("circle")
     .attr("r", 5)
-    .attr("fill", "blue")
+    .attr("fill", "brown")
     .attr("transform", circTransform4)
     .on("mouseover", function(){
         return tooltip.style("visibility", "visible").html("Without a home and without the prospect" + '<br>' + "of a new job, people start leaving the city.");
@@ -256,7 +256,7 @@ var circle4 = svg.append("circle")
 
 var circle5 = svg.append("circle")
     .attr("r", 5)
-    .attr("fill", "blue")
+    .attr("fill", "brown")
     .attr("transform", circTransform5)
     .on("mouseover", function(){
         return tooltip.style("visibility", "visible")
@@ -271,7 +271,7 @@ var circle5 = svg.append("circle")
 
 var circle6 = svg.append("circle")
     .attr("r", 5)
-    .attr("fill", "blue")
+    .attr("fill", "brown")
     .attr("transform", circTransform6)
     .on("mouseover", function(){
         return tooltip.style("visibility", "visible").html("The abandoned homes decrease the quality of life" + '<br>' + 'in the neighborhood as gangs and drug addicts take over the homes.');
@@ -285,7 +285,7 @@ var circle6 = svg.append("circle")
 
 var circle7 = svg.append("circle")
     .attr("r", 5)
-    .attr("fill", "blue")
+    .attr("fill", "brown")
     .attr("transform", circTransform7)
     .on("mouseover", function(){
         return tooltip.style("visibility", "visible").html("More people move away.");
@@ -299,7 +299,7 @@ var circle7 = svg.append("circle")
 
 var circle8 = svg.append("circle")
     .attr("r", 5)
-    .attr("fill", "blue")
+    .attr("fill", "brown")
     .attr("transform", circTransform8)
     .on("mouseover", function(){
         return tooltip.style("visibility", "visible").html('Less people means less potential employees and less money spent.');
