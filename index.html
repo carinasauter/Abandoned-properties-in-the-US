@@ -396,14 +396,14 @@
   <div align='center'><img src="img/arrow.jpg" alt="Down arrow" width="5%" style="display: block; margin: auto;">
   </div>
   
-    <div id="violation_chart" style="min-width: 310px; height: 400px; margin: 0 auto">
+    <div id="violation_chart" style="min-width: 310px; height: 400px; margin: 0 auto; max-width: 800px;">
         <script>
             Highcharts.chart('violation_chart', {
                 chart: {
                     type: 'line'
                 },
                 title: {
-                    text: 'Number of violations related to vacant properties in Chicago by year'
+                    text: 'Not surprisingly, the number of violations related to vacant property in Chicago has also steadily increased in recent years - the vicious cycle in action.'
                 },
                 subtitle: {
                     text: ''
@@ -414,8 +414,10 @@
                 yAxis: {
                     title: {
                         text: '# of violations'
-                    }
+                    },
+                    min: 0
                 },
+
                 plotOptions: {
                     line: {
                         dataLabels: {
@@ -491,8 +493,8 @@
     <section id="next_steps">
 
     <hr style="border-color: #c6c6c6; border-width: 4px; max-width: 90%;">
-    <h2 style='color:black;'><i> What Now? </i></h2>
-    <p> In order to prevent undesirable outcomes, residents should be proactive and look for ways to help the neighborhood's well being. Here are some actions California residents can take when there is an abandoned property in the neighborhood:</p>
+    <h2 style='color:black;'><i> What you can do </i></h2>
+    <p> In order to prevent undesirable outcomes, residents should be proactive and look for ways to help the neighborhood's well-being. Here are some actions community members can take when there is an abandoned property in the neighborhood:</p>
 
 
     <div class="container">

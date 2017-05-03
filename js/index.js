@@ -80,16 +80,16 @@ defs.append("marker")
             .attr("d", "M0,-5L10,0L0,5")
             .attr("class","arrowHead");
 
-defs.append("marker")
-        .attrs({
-            "id":"turtle",
-            "viewBox":"0 0 100 100",
-            "refX":50,
-            "refY":50,
-            "markerWidth":10,
-            "markerHeight":10,
-            "orient":"auto"
-        });
+// defs.append("marker")
+//         .attrs({
+//             "id":"turtle",
+//             "viewBox":"0 0 100 100",
+//             "refX":50,
+//             "refY":50,
+//             "markerWidth":10,
+//             "markerHeight":10,
+//             "orient":"auto"
+//         });
 
 
 // var carinaArc = d3.arc()
