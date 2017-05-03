@@ -163,7 +163,7 @@ header {
 }
 
 #sources {
-  background-color: #5C4742;
+  /*background-color: #5C4742;*/
   height: 20vh;
 
   text-align: center;
@@ -172,7 +172,7 @@ header {
 #sources > div {
   text-align: center;
   justify-content: center;
-  color: white;
+  color: black;
 }
 
 .bg-primary {
