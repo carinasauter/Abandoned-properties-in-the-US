@@ -313,3 +313,29 @@ var circle8 = svg.append("circle")
         return tooltip.style("visibility", "hidden");
     });
 
+svg.append("text")
+    .attr("class", "clabel")
+    .attr("text-anchor", "middle")
+    .text("Vicious cycle of")
+    .attr("transform", "translate(300, 280)")
+    .style("font-family", "open sans")
+    .style("font-size", "14px")
+    .style('fill','#555');
+
+svg.append("text")
+    .attr("class", "clabel")
+    .attr("text-anchor", "middle")
+    .text("abandonment and")
+    .attr("transform", "translate(300, 300)")
+    .style("font-family", "open sans")
+    .style("font-size", "14px")
+    .style('fill','#555');
+
+svg.append("text")
+    .attr("class", "clabel")
+    .attr("text-anchor", "middle")
+    .text("economic depravity")
+    .attr("transform", "translate(300, 320)")
+    .style("font-family", "open sans")
+    .style("font-size", "14px")
+    .style('fill','#555');
