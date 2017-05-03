@@ -163,17 +163,19 @@ header {
 }
 
 #sources {
-  /*background-color: #5C4742;*/
-  height: 20vh;
-
   text-align: center;
+  padding-top: 40px;
+  background: #5C4742;
+  color: white;
+  margin: auto;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
-#sources > div {
-  text-align: center;
-  justify-content: center;
-  color: black;
+#sources > p {
+  font-size: 14px;
 }
+
 
 .bg-primary {
   background-color: #5C4742;
