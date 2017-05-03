@@ -316,8 +316,26 @@ var circle8 = svg.append("circle")
 svg.append("text")
     .attr("class", "clabel")
     .attr("text-anchor", "middle")
-    .text("Hover over the points to explore")
-    .attr("transform", "translate(300, 280)")
+    .text("Hover over the")
+    .attr("transform", "translate(240, 280)")
+    .style("font-family", "open sans")
+    .style("font-size", "14px")
+    .style('fill','#555');
+
+svg.append("text")
+    .attr("class", "clabel")
+    .attr("text-anchor", "middle")
+    .text("points")
+    .attr("transform", "translate(313, 280)")
+    .style("font-family", "open sans")
+    .style("font-size", "14px")
+    .style('fill','brown');
+
+svg.append("text")
+    .attr("class", "clabel")
+    .attr("text-anchor", "middle")
+    .text("to explore")
+    .attr("transform", "translate(370, 280)")
     .style("font-family", "open sans")
     .style("font-size", "14px")
     .style('fill','#555');
