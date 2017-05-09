@@ -197,7 +197,8 @@ var line8 = svg.append("line")
 
 var circle1 = svg.append("circle")
                 .attr("r", 5)
-                .attr("fill", "#6D4C3D")
+                .attr("fill", "blue")
+                .attr('stroke', 'blue')
                 .attr("transform", circTransform1)
                 .on("mouseover", function(){
                     return tooltip.style("visibility", "visible").html("The economic situation worsens.");
@@ -214,6 +215,7 @@ var circle1 = svg.append("circle")
 var circle2 = svg.append("circle")
     .attr("r", 5)
     .attr("fill", "#6D4C3D")
+    .attr('stroke', '#6D4C3D')
     .attr("transform", circTransform2)
     .on("mouseover", function(){
         return tooltip.style("visibility", "visible").html("The unemployment rate increases as " + "<br>" + "companies cut down costs.");
@@ -230,6 +232,7 @@ var circle2 = svg.append("circle")
 var circle3 = svg.append("circle")
     .attr("r", 5)
     .attr("fill", "#6D4C3D")
+    .attr('stroke', '#6D4C3D')
     .attr("transform", circTransform3)
     .on("mouseover", function(){
         return tooltip.style("visibility", "visible").html("Without a job, people default on their mortgages."+ "<br>" + "Their homes enter foreclosure.");
@@ -245,6 +248,7 @@ var circle3 = svg.append("circle")
 var circle4 = svg.append("circle")
     .attr("r", 5)
     .attr("fill", "#6D4C3D")
+    .attr('stroke', '#6D4C3D')
     .attr("transform", circTransform4)
     .on("mouseover", function(){
         return tooltip.style("visibility", "visible").html("Without a home and without the prospect" + '<br>' + "of a new job, people start leaving the city.");
@@ -259,6 +263,7 @@ var circle4 = svg.append("circle")
 var circle5 = svg.append("circle")
     .attr("r", 5)
     .attr("fill", "#6D4C3D")
+    .attr('stroke', '#6D4C3D')
     .attr("transform", circTransform5)
     .on("mouseover", function(){
         return tooltip.style("visibility", "visible")
@@ -274,6 +279,7 @@ var circle5 = svg.append("circle")
 var circle6 = svg.append("circle")
     .attr("r", 5)
     .attr("fill", "#6D4C3D")
+    .attr('stroke', '#6D4C3D')
     .attr("transform", circTransform6)
     .on("mouseover", function(){
         return tooltip.style("visibility", "visible").html("The abandoned homes decrease the quality of life" + '<br>' + 'in the neighborhood as gangs and drug addicts take over the homes.');
@@ -287,7 +293,8 @@ var circle6 = svg.append("circle")
 
 var circle7 = svg.append("circle")
     .attr("r", 5)
-    .attr("fill", "red")
+    .attr("fill", "#6D4C3D")
+    .attr('stroke', '#6D4C3D')
     .attr("transform", circTransform7)
     .on("mouseover", function(){
         return tooltip.style("visibility", "visible").html("More people move away.");
@@ -302,6 +309,7 @@ var circle7 = svg.append("circle")
 var circle8 = svg.append("circle")
     .attr("r", 5)
     .attr("fill", "#6D4C3D")
+    .attr('stroke', '#6D4C3D')
     .attr("transform", circTransform8)
     .on("mouseover", function(){
         return tooltip.style("visibility", "visible").html('Less people means less potential employees and less money spent.');
@@ -330,7 +338,7 @@ svg.append("text")
     .style("font-family", "open sans")
     .style("font-size", "14px")
     .style("font-weight", "bold")
-    .style('fill','brown');
+    .style('fill','#6D4C3D');
 
 svg.append("text")
     .attr("class", "clabel")
@@ -353,8 +361,40 @@ svg.append("text")
 svg.append("text")
     .attr("class", "clabel")
     .attr("text-anchor", "middle")
-    .text("to properties being abandoned")
+    .text("to properties being abandoned.")
     .attr("transform", "translate(300, 320)")
     .style("font-family", "open sans")
     .style("font-size", "14px")
     .style('fill','#555');
+
+
+svg.append("text")
+    .attr("class", "clabel")
+    .attr("text-anchor", "middle")
+    .text("Start with the")
+    .attr("transform", "translate(257, 340)")
+    .style("font-family", "open sans")
+    .style("font-size", "14px")
+    .style('fill','#555');
+
+svg.append("text")
+    .attr("class", "clabel")
+    .attr("text-anchor", "middle")
+    .text("blue")
+    .attr("transform", "translate(320, 340)")
+    .style("font-family", "open sans")
+    .style("font-size", "14px")
+    .style("font-weight", "bold")
+    .style('fill','blue');
+
+
+svg.append("text")
+    .attr("class", "clabel")
+    .attr("text-anchor", "middle")
+    .text("circle.")
+    .attr("transform", "translate(358, 340)")
+    .style("font-family", "open sans")
+    .style("font-size", "14px")
+    .style('fill','#555');
+
+
