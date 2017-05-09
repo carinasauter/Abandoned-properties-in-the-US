@@ -709,13 +709,12 @@ circle{
 }
 
 .left_div {
-  width:300px;
+  /*width:300px;*/
   margin: auto;
   /*background-color: red;*/
 }
 
 .right_div {
-  width:300px;
   margin: auto;
   /*background-color: green;*/
 }
