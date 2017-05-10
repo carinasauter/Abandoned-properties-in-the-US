@@ -195,13 +195,24 @@ $(function () {
                         backgroundColor: 'rgba(255, 255, 255, 0.42)'//(Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
                     },
                     series: [{
+                        name: 'Foreclosures',
+                        type: 'column',
+                        yAxis: 1,
+                        data: [885, 1259, 2203, 3019, 3457, 3843, 3920, 2300, 1369, 1117, 1100],
+                        color: '#AF9164',
+                        tooltip: {
+                            valueSuffix: ' K'
+                        }
+
+                    },
+                        {
                         name: 'People below poverty',
                         type: 'spline',
                         yAxis: 2,
                         data: [36.9, 36.5, 37.3, 39.8, 43.6, 46.3, 46.2, 46.5, 46.3, 46.7, 43.1],
-                        color: '#4a934a',
+                        color: '#077907',
                         marker: {
-                            enabled: false
+                            enabled: true
                         },
                         dashStyle: 'shortdot',
                         tooltip: {
